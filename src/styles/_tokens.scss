@@ -1,0 +1,81 @@
+// ЗІРКА design system tokens (ported from the claude.ai/design project `_ds/…/tokens/*.css`).
+// Emitted once from globals.scss — never @use this file from a module.
+
+:root {
+  // Brand core
+  --zirka-flame: #e8571b;
+  --zirka-orange: #fd9b00;
+  --zirka-amber: #ffc003;
+  --zirka-ink: #1d1d1b;
+
+  // Flame ramp
+  --flame-700: #a8350a;
+  --flame-600: #c9430f;
+  --flame-500: #e8571b;
+  --flame-400: #f2783f;
+  --flame-300: #f7a077;
+  --flame-100: #fce0d3;
+  --flame-50: #fef2eb;
+
+  // Amber ramp
+  --amber-600: #d9a000;
+  --amber-500: #ffc003;
+  --amber-100: #fff1c2;
+  --amber-50: #fff8e2;
+
+  // Warm neutrals
+  --white: #fff;
+  --gray-50: #fafaf6;
+  --gray-100: #f2f1ea;
+  --gray-200: #e4e3da;
+  --gray-300: #c9c8bd;
+  --gray-400: #a6a599;
+  --gray-500: #807f75;
+  --gray-600: #5e5e56;
+  --gray-700: #45453f;
+  --gray-800: #2e2e2b;
+  --gray-900: #1d1d1b;
+
+  // Gradients
+  --gradient-brand: linear-gradient(120deg, #e8571b 0%, #fd9b00 52%, #ffc003 100%);
+  --gradient-ink: linear-gradient(160deg, #2e2e2b 0%, #1d1d1b 100%);
+
+  // Status
+  --success: #1f8a4c;
+  --success-bg: #e6f4ec;
+
+  // Semantic aliases
+  --brand-primary: var(--flame-500);
+  --brand-primary-hover: var(--flame-600);
+  --brand-primary-press: var(--flame-700);
+  --brand-accent: var(--amber-500);
+  --text-primary: var(--gray-900);
+  --text-secondary: var(--gray-600);
+  --text-muted: var(--gray-500);
+  --text-on-brand: var(--white);
+  --border-subtle: var(--gray-200);
+  --border-default: var(--gray-300);
+  --focus-ring: 0 0 0 3px rgb(232 87 27 / 32%);
+
+  // Typography — the font variables come from next/font in app/layout.tsx.
+  // Codec Pro is the design's display face; until its file is added to
+  // public/fonts it falls back to Montserrat (Eurostile has no Cyrillic).
+  --font-display: 'Codec Pro', var(--font-montserrat), 'Arial Narrow', sans-serif;
+  --font-euro: var(--font-eurostile), 'Arial Narrow', impact, sans-serif;
+  --font-sans: var(--font-montserrat), 'Segoe UI', system-ui, sans-serif;
+  --font-mono: var(--font-source-code), ui-monospace, menlo, monospace;
+
+  // Radii
+  --radius-sm: 5px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+
+  // Shadows
+  --shadow-sm: 0 1px 3px rgb(29 29 27 / 8%), 0 1px 2px rgb(29 29 27 / 4%);
+  --shadow-md: 0 4px 12px rgb(29 29 27 / 8%), 0 2px 4px rgb(29 29 27 / 5%);
+  --shadow-glow: 0 6px 22px rgb(232 87 27 / 30%);
+
+  // Motion
+  --ease-standard: cubic-bezier(0.2, 0, 0.1, 1);
+  --duration-base: 200ms;
+}

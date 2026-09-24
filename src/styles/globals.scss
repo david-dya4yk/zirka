@@ -1,3 +1,15 @@
+@use 'tokens';
+
+// Codec Pro Bold — drop the licensed file at public/fonts/CodecPro-Bold.ttf.
+// While it is missing, --font-display falls back to Montserrat.
+@font-face {
+  font-family: 'Codec Pro';
+  src: url('/fonts/CodecPro-Bold.ttf') format('truetype');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
 *,
 *::before,
 *::after {
@@ -7,17 +19,7 @@
 }
 
 :root {
-  --background: #fff;
-  --foreground: #171717;
-
-  color-scheme: light dark;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  color-scheme: light;
 }
 
 html {
@@ -28,11 +30,16 @@ html {
 body {
   min-height: 100%;
   overflow-x: hidden;
-  color: var(--foreground);
+  color: #fff;
   font-family: $font-sans;
-  background: var(--background);
+  background: #15140f;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+  color: #1d1d1b;
+  background: #ffc003;
 }
 
 a {

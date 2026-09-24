@@ -1,27 +1,39 @@
 import type { Metadata } from 'next';
-import { Geist, Geist_Mono } from 'next/font/google';
+import { Montserrat, Source_Code_Pro } from 'next/font/google';
+import localFont from 'next/font/local';
 import '@/styles/globals.scss';
 
-const geistSans = Geist({
-  variable: '--font-geist-sans',
-  subsets: ['latin'],
+const montserrat = Montserrat({
+  variable: '--font-montserrat',
+  subsets: ['latin', 'cyrillic'],
 });
 
-const geistMono = Geist_Mono({
-  variable: '--font-geist-mono',
-  subsets: ['latin'],
+const sourceCodePro = Source_Code_Pro({
+  variable: '--font-source-code',
+  subsets: ['latin', 'cyrillic'],
+});
+
+const eurostile = localFont({
+  variable: '--font-eurostile',
+  src: '../fonts/EurostileExtendedBlack.ttf',
+  weight: '900',
+  display: 'swap',
 });
 
 export const metadata: Metadata = {
-  title: 'Zirka',
-  description: 'Zirka',
+  title: 'ЗІРКА — забудовник повного циклу, Чернівці',
+  description:
+    'ПВКФ «ЗІРКА» — будуємо самі від ділянки до здачі ключа. Власна земля, власна техніка, свої люди. ЖК на Хотинській у будівництві.',
 };
 
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>): React.JSX.Element {
   return (
-    <html lang="en" className={`${geistSans.variable} ${geistMono.variable}`}>
+    <html
+      lang="uk"
+      className={`${montserrat.variable} ${sourceCodePro.variable} ${eurostile.variable}`}
+    >
       <body>{children}</body>
     </html>
   );
