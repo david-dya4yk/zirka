@@ -131,3 +131,22 @@
     accent-color: var(--flame-500);
   }
 }
+
+.honeypot {
+  @include visually-hidden;
+}
+
+.status {
+  min-height: 1.5em;
+  margin-top: 20px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.statusSuccess {
+  color: var(--success);
+}
+
+.statusError {
+  color: var(--flame-600);
+}
