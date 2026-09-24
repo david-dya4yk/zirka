@@ -1,10 +1,16 @@
 'use client';
 
 import Image from 'next/image';
+import { useActionState } from 'react';
+import { type LeadFormState, sendLead } from '@/app/actions/sendLead';
 import { Button } from '@/components/ui/Button';
 import styles from './ContactSection.module.scss';
 
+const INITIAL_STATE: LeadFormState = { status: 'idle', message: '' };
+
 export function ContactSection(): React.JSX.Element {
+  const [state, formAction, isPending] = useActionState(sendLead, INITIAL_STATE);
+
   return (
     <section id="contact" className={styles.section}>
       <div className={styles.inner}>
@@ -21,12 +27,16 @@ export function ContactSection(): React.JSX.Element {
           </div>
         </div>
 
-        {/* TODO: wire submission to a lead endpoint — no backend exists yet. */}
-        <form
-          onSubmit={(e) => {
-            e.preventDefault();
-          }}
-        >
+        <form action={formAction}>
+          {/* Honeypot for bots — hidden from people and assistive tech. */}
+          <input
+            className={styles.honeypot}
+            type="text"
+            name="company"
+            tabIndex={-1}
+            autoComplete="off"
+            aria-hidden="true"
+          />
           <div className={styles.fields}>
             <label className={styles.field}>
               <span className={styles.fieldLabel}>
@@ -90,10 +100,18 @@ export function ContactSection(): React.JSX.Element {
               <input type="checkbox" name="consent" required />
               Погоджуюсь з політикою конфіденційності
             </label>
-            <Button type="submit" size="lg">
-              Надіслати
+            <Button type="submit" size="lg" disabled={isPending}>
+              {isPending ? 'Надсилаємо…' : 'Надіслати'}
             </Button>
           </div>
+
+          <p
+            className={`${styles.status} ${state.status === 'error' ? styles.statusError : styles.statusSuccess}`}
+            role="status"
+            aria-live="polite"
+          >
+            {state.message}
+          </p>
         </form>
       </div>
     </section>

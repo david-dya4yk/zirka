@@ -11,6 +11,7 @@ interface ButtonProps {
   /** Renders an `<a>` when set, otherwise a `<button>`. */
   href?: string;
   type?: 'button' | 'submit';
+  disabled?: boolean;
   className?: string;
 }
 
@@ -20,6 +21,7 @@ export function Button({
   size = 'md',
   href,
   type = 'button',
+  disabled = false,
   className,
 }: ButtonProps): React.JSX.Element {
   const cls = [styles.button, styles[variant], styles[size], className].filter(Boolean).join(' ');
@@ -33,7 +35,7 @@ export function Button({
   }
 
   return (
-    <button type={type} className={cls}>
+    <button type={type} className={cls} disabled={disabled}>
       {children}
     </button>
   );
