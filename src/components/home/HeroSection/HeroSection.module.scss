@@ -1,0 +1,425 @@
+// Left edge of the 1280px content column, so hero overlays align with sections below.
+$content-left: max(#{$gutter}, calc((100vw - #{$container-max}) / 2 + #{$gutter}));
+$grid-step: 86px;
+
+.track {
+  position: relative;
+  height: 340vh;
+}
+
+.stage {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow: hidden;
+  background: #15140f;
+}
+
+.frame {
+  z-index: 0;
+  object-fit: cover;
+}
+
+.grid {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: #8a847a;
+  opacity: 0.1;
+  pointer-events: none;
+  mask:
+    repeating-linear-gradient(0deg, #000 0 1px, transparent 1px $grid-step),
+    repeating-linear-gradient(90deg, #000 0 1px, transparent 1px $grid-step);
+}
+
+.gridSpot {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  mask: radial-gradient(
+    circle 240px at var(--mx, -600px) var(--my, -600px),
+    #000 0%,
+    rgb(0 0 0 / 60%) 42%,
+    transparent 72%
+  );
+}
+
+.gridSpotLines {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(125deg, #e8571b 0%, #fd9b00 50%, #ffc003 100%);
+  opacity: 0.6;
+  mask:
+    repeating-linear-gradient(0deg, #000 0 1.4px, transparent 1.4px $grid-step),
+    repeating-linear-gradient(90deg, #000 0 1.4px, transparent 1.4px $grid-step);
+}
+
+.scrim {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+  background: linear-gradient(
+    90deg,
+    rgb(15 12 8 / 76%),
+    rgb(20 19 17 / 34%) 56%,
+    rgb(20 19 17 / 6%) 100%
+  );
+}
+
+.navLayer {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 5;
+}
+
+.topShade {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 3;
+  height: 10%;
+  background: linear-gradient(rgb(20 19 17 / 50%) 0%, rgb(20 19 17 / 0%) 100%);
+  pointer-events: none;
+}
+
+.eyebrow {
+  position: absolute;
+  top: 84px;
+  left: $content-left;
+  z-index: 4;
+  color: #ffc003;
+  font-family: $font-mono;
+  font-size: 11px;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  white-space: nowrap;
+
+  @include down('lg') {
+    top: 104px;
+    left: $gutter-mobile;
+  }
+}
+
+.textCol {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: min(100%, calc(#{$content-left} + 580px));
+  padding: 72px 40px 0 $content-left;
+
+  @include down('lg') {
+    top: auto;
+    width: 100%;
+    padding: 56px $gutter-mobile 96px;
+    background: linear-gradient(to top, rgb(20 19 17 / 75%), rgb(20 19 17 / 0%));
+  }
+}
+
+.title {
+  margin: 0 0 22px;
+  font-family: $font-display;
+  font-size: clamp(26px, 3.2vw, 42px);
+  font-weight: 900;
+  line-height: 1.07;
+  letter-spacing: 0.004em;
+  text-transform: uppercase;
+  text-shadow: 0 2px 24px rgb(0 0 0 / 40%);
+}
+
+@keyframes shimmer {
+  from {
+    background-position: 0% 50%;
+  }
+
+  to {
+    background-position: 200% 50%;
+  }
+}
+
+.shimmer {
+  color: transparent;
+  background: linear-gradient(90deg, #ffc003, #fd9b00, #e8571b, #fd9b00, #ffc003) 0 0 / 200%;
+  background-clip: text;
+  text-shadow: none;
+  animation: shimmer 4s linear infinite;
+  -webkit-text-fill-color: transparent;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+
+  @include down('lg') {
+    flex-wrap: nowrap;
+    gap: 8px;
+
+    > a {
+      flex: 1 1 0;
+      min-width: 0;
+      padding-right: 10px;
+      padding-left: 10px;
+      font-size: 12px;
+    }
+  }
+}
+
+// ---- HUD ----
+
+.hud {
+  position: absolute;
+  top: 84px;
+  right: max(26px, calc((100vw - #{$container-max}) / 2 + 4px));
+  z-index: 4;
+  width: 250px;
+  padding: 16px 16px 18px;
+  color: #fff;
+  background: rgb(18 17 15 / 72%);
+  border: 1px solid rgb(255 192 3 / 30%);
+  border-radius: 8px;
+  backdrop-filter: blur(9px);
+
+  @include down('lg') {
+    display: none;
+  }
+}
+
+.monoLabel {
+  color: rgb(255 255 255 / 50%);
+  font-family: $font-mono;
+  font-size: 10px;
+  letter-spacing: 1.5px;
+}
+
+.hudHead {
+  display: flex;
+  gap: 7px;
+  align-items: center;
+  margin-bottom: 11px;
+
+  .monoLabel {
+    color: rgb(255 255 255 / 55%);
+  }
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgb(232 87 27 / 55%);
+  }
+
+  70% {
+    box-shadow: 0 0 0 7px rgb(232 87 27 / 0%);
+  }
+
+  100% {
+    box-shadow: 0 0 0 0 rgb(232 87 27 / 0%);
+  }
+}
+
+.pulseDot {
+  width: 7px;
+  height: 7px;
+  background: #e8571b;
+  border-radius: 50%;
+  animation: pulse 1.8s ease-out infinite;
+}
+
+.hudObject {
+  margin: 3px 0 12px;
+  font-family: $font-display;
+  font-size: 14px;
+  letter-spacing: 0.5px;
+}
+
+.hudCoords {
+  color: #ffc003;
+  font-family: $font-mono;
+  font-size: 11px;
+  letter-spacing: 0.5px;
+}
+
+.hudPlot {
+  margin-top: 4px;
+  color: rgb(255 255 255 / 55%);
+  font-family: $font-mono;
+  font-size: 11px;
+}
+
+.hudDivider {
+  height: 1px;
+  margin: 13px 0;
+  background: rgb(255 255 255 / 12%);
+}
+
+.hudStage {
+  margin: 3px 0 14px;
+  font-family: $font-display;
+  font-size: 16px;
+}
+
+.hudReadiness {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+.hudPercent {
+  color: #ffc003;
+  font-family: $font-mono;
+  font-size: 26px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.progress {
+  height: 5px;
+  margin-top: 8px;
+  overflow: hidden;
+  background: rgb(255 255 255 / 14%);
+  border-radius: 3px;
+}
+
+.progressBar {
+  height: 100%;
+  background: linear-gradient(90deg, #e8571b, #ffc003);
+  border-radius: 3px;
+}
+
+// ---- Stage rail ----
+
+.rail {
+  position: absolute;
+  top: 62%;
+  right: max(26px, calc((100vw - #{$container-max}) / 2 + 4px));
+  z-index: 4;
+  display: flex;
+  flex-direction: column;
+  width: 250px;
+  padding: 14px 16px;
+  list-style: none;
+  background: rgb(18 17 15 / 60%);
+  border: 1px solid rgb(255 255 255 / 12%);
+  border-radius: 8px;
+  backdrop-filter: blur(6px);
+
+  @include down('lg') {
+    display: none;
+  }
+}
+
+.railItem {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  padding: 5px 0;
+}
+
+.railMark {
+  @include flex-center;
+
+  flex: none;
+  width: 20px;
+  height: 20px;
+  font-family: $font-mono;
+  font-size: 10px;
+  font-weight: 600;
+  border-radius: 5px;
+}
+
+.railName {
+  font-family: $font-display;
+  font-size: 11px;
+  letter-spacing: 1px;
+}
+
+.active {
+  .railMark {
+    color: #1d1d1b;
+    background: #ffc003;
+  }
+
+  .railName {
+    color: #fff;
+  }
+}
+
+.done {
+  opacity: 0.85;
+
+  .railMark {
+    color: #ffc003;
+    background: rgb(255 192 3 / 18%);
+    border: 1px solid rgb(255 255 255 / 20%);
+  }
+
+  .railName {
+    color: rgb(255 255 255 / 70%);
+  }
+}
+
+.todo {
+  opacity: 0.4;
+
+  .railMark {
+    color: rgb(255 255 255 / 60%);
+    background: rgb(255 255 255 / 6%);
+    border: 1px solid rgb(255 255 255 / 20%);
+  }
+
+  .railName {
+    color: rgb(255 255 255 / 70%);
+  }
+}
+
+// ---- Scroll hint ----
+
+.hint {
+  position: absolute;
+  bottom: 28px;
+  left: 50%;
+  z-index: 4;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  align-items: center;
+  color: rgb(255 255 255 / 70%);
+  font-family: $font-mono;
+  font-size: 10px;
+  letter-spacing: 2px;
+  white-space: nowrap;
+  transform: translateX(-50%);
+
+  @include down('lg') {
+    bottom: 20px;
+  }
+}
+
+@keyframes bob {
+  0%,
+  100% {
+    opacity: 0.9;
+    transform: translateY(0);
+  }
+
+  50% {
+    opacity: 0.35;
+    transform: translateY(7px);
+  }
+}
+
+.hintLine {
+  width: 1px;
+  height: 26px;
+  background: linear-gradient(rgb(255 192 3 / 85%), transparent);
+  animation: bob 1.6s ease-in-out infinite;
+}

@@ -1,0 +1,126 @@
+.header {
+  position: relative;
+}
+
+.row {
+  @include container;
+
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  justify-content: space-between;
+  height: 72px;
+}
+
+.logo {
+  display: flex;
+  flex: none;
+  align-items: center;
+
+  img {
+    width: auto;
+    height: 38px;
+  }
+}
+
+.links {
+  display: flex;
+  gap: 2px;
+  align-items: center;
+
+  @include down('lg') {
+    display: none;
+  }
+}
+
+.link {
+  padding: 10px 14px;
+  color: rgb(255 255 255 / 66%);
+  font-family: $font-display;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transition: color $transition-fast;
+
+  &:hover {
+    color: #fff;
+  }
+}
+
+.aside {
+  display: flex;
+  flex: none;
+  gap: 16px;
+  align-items: center;
+}
+
+.phone {
+  display: flex;
+  gap: 7px;
+  align-items: center;
+  color: #fff;
+  font-family: $font-mono;
+  font-size: 13px;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+
+  @include down('lg') {
+    display: none;
+  }
+}
+
+.toggle {
+  @include flex-center;
+
+  display: none;
+  flex: none;
+  width: 38px;
+  height: 38px;
+  background: none;
+  border: 1px solid rgb(255 255 255 / 28%);
+  border-radius: 8px;
+  cursor: pointer;
+
+  @include down('lg') {
+    display: flex;
+  }
+}
+
+.mobileMenu {
+  position: absolute;
+  top: 72px;
+  right: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 8px $gutter-mobile 20px;
+  background: rgb(15 14 11 / 97%);
+  border-top: 1px solid rgb(255 255 255 / 8%);
+
+  @include up('lg') {
+    display: none;
+  }
+}
+
+.mobileLink {
+  padding: 12px 4px;
+  color: rgb(255 255 255 / 85%);
+  font-family: $font-display;
+  font-size: 13px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  border-bottom: 1px solid rgb(255 255 255 / 8%);
+
+  &:last-of-type {
+    border-bottom: none;
+  }
+}
+
+.mobilePhone {
+  display: block;
+  padding: 14px 4px 4px;
+  color: #fff;
+  font-family: $font-mono;
+  font-size: 13px;
+  letter-spacing: 0.5px;
+}

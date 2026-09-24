@@ -1,0 +1,229 @@
+.section {
+  background: #fff;
+}
+
+.inner {
+  @include container;
+
+  padding-top: 88px;
+  padding-bottom: 88px;
+}
+
+.head {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 40px;
+}
+
+.eyebrow {
+  @include label;
+
+  margin-bottom: 16px;
+  color: var(--brand-primary);
+}
+
+.title {
+  @include section-title;
+}
+
+.lead {
+  @include lead;
+
+  max-width: 540px;
+}
+
+// ---- Featured project ----
+
+.featured {
+  display: grid;
+  grid-template-columns: 1.12fr 0.88fr;
+  margin-bottom: 28px;
+  overflow: hidden;
+  background: #fff;
+  border: 1px solid var(--border-subtle);
+  border-top: 3px solid var(--brand-primary);
+  border-radius: 14px;
+  box-shadow: var(--shadow-md);
+
+  @include down('md') {
+    grid-template-columns: 1fr;
+  }
+}
+
+.featuredMedia {
+  position: relative;
+  min-height: 380px;
+  background: #15140f;
+
+  img {
+    object-fit: cover;
+  }
+
+  @include down('md') {
+    min-height: 220px;
+  }
+}
+
+.featuredShade {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgb(20 19 17 / 18%), rgb(20 19 17 / 0%) 35%);
+}
+
+.featuredBadge {
+  position: absolute;
+  top: 18px;
+  left: 18px;
+}
+
+.featuredBody {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 44px;
+
+  @include down('md') {
+    padding: 32px 24px;
+  }
+}
+
+.kicker {
+  @include label(11px, 0.12em);
+
+  margin-bottom: 12px;
+  color: var(--brand-primary);
+}
+
+.featuredTitle {
+  margin: 0 0 6px;
+  color: var(--text-primary);
+  font-family: $font-display;
+  font-size: 28px;
+  font-weight: 900;
+  line-height: 1.08;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.featuredSub {
+  margin-bottom: 24px;
+  color: var(--text-muted);
+  font-size: 14px;
+}
+
+.facts {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-bottom: 26px;
+  list-style: none;
+
+  li {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    color: var(--text-secondary);
+    font-size: 15px;
+  }
+}
+
+.offerTag {
+  display: inline-flex;
+  gap: 10px;
+  align-items: center;
+  align-self: flex-start;
+  margin-bottom: 26px;
+  padding: 8px 14px;
+  background: var(--flame-50);
+  border-radius: 8px;
+
+  span {
+    @include label(12px, 0.04em);
+
+    color: var(--brand-primary);
+  }
+}
+
+// ---- Completed projects ----
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+
+  @include down('md') {
+    grid-template-columns: 1fr;
+  }
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: #fff;
+  border: 1px solid var(--border-subtle);
+  border-radius: 14px;
+}
+
+.cardMedia {
+  position: relative;
+  height: 200px;
+  background: var(--gray-100);
+
+  img {
+    object-fit: cover;
+  }
+}
+
+.cardBadge {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  z-index: 2;
+}
+
+.cardBody {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 6px;
+  padding: 22px;
+}
+
+.cardTitle {
+  color: var(--text-primary);
+  font-family: $font-display;
+  font-size: 17px;
+  font-weight: 900;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+.cardAddress {
+  color: var(--text-muted);
+  font-size: 13.5px;
+}
+
+.cardFoot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 34px;
+  margin-top: auto;
+  padding-top: 16px;
+}
+
+.note {
+  @include label(11px, 0.04em);
+
+  color: var(--text-muted);
+}
+
+.noteAccent {
+  @include label(11px, 0.04em);
+
+  color: var(--brand-primary);
+}

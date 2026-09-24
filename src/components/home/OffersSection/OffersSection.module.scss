@@ -1,0 +1,120 @@
+.section {
+  background: var(--gray-50);
+  border-top: 1px solid var(--border-subtle);
+}
+
+.inner {
+  @include container;
+
+  padding-top: 88px;
+  padding-bottom: 88px;
+}
+
+.eyebrow {
+  @include label;
+
+  margin-bottom: 16px;
+  color: var(--brand-primary);
+}
+
+.title {
+  @include section-title;
+}
+
+.lead {
+  @include lead;
+
+  max-width: 540px;
+  margin: 0 0 46px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+
+  @include down('md') {
+    grid-template-columns: 1fr;
+  }
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  padding: 38px 36px;
+  background: #fff;
+  border: 1px solid var(--border-subtle);
+  border-top: 3px solid var(--brand-primary);
+  border-radius: 16px;
+  box-shadow: var(--shadow-sm);
+
+  @include down('md') {
+    padding: 30px 24px;
+  }
+}
+
+.figure {
+  margin-bottom: 20px;
+  color: var(--text-primary);
+  font-family: $font-euro;
+  font-size: 34px;
+  font-weight: 900;
+  line-height: 1;
+}
+
+// Eurostile has no Cyrillic, so the unit words use the body face.
+.unit {
+  margin-left: 6px;
+  color: var(--text-muted);
+  font-family: $font-sans;
+  font-size: 0.5em;
+  font-weight: 500;
+}
+
+.cardTitle {
+  margin: 0 0 10px;
+  color: var(--text-primary);
+  font-family: $font-display;
+  font-size: 19px;
+  font-weight: 900;
+  line-height: 1.15;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+.cardText {
+  margin: 0 0 8px;
+  color: var(--text-secondary);
+  font-size: 14.5px;
+  line-height: 1.6;
+}
+
+.cardNote {
+  margin: 0 0 26px;
+  color: var(--text-muted);
+  font-size: 13px;
+}
+
+.cardAction {
+  margin-top: auto;
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgb(232 87 27 / 55%);
+  }
+
+  70% {
+    box-shadow: 0 0 0 7px rgb(232 87 27 / 0%);
+  }
+
+  100% {
+    box-shadow: 0 0 0 0 rgb(232 87 27 / 0%);
+  }
+}
+
+.pulse {
+  display: inline-block;
+  border-radius: 8px;
+  animation: pulse 2s ease-out infinite;
+}

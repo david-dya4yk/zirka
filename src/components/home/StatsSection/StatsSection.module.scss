@@ -1,0 +1,71 @@
+.section {
+  position: relative;
+  z-index: 5;
+  background: var(--gray-50);
+  border-top: 1px solid var(--border-subtle);
+}
+
+.inner {
+  @include container;
+
+  padding-top: 88px;
+  padding-bottom: 88px;
+}
+
+.eyebrow {
+  @include label;
+
+  margin-bottom: 16px;
+  color: var(--brand-primary);
+}
+
+.title {
+  @include section-title;
+}
+
+.lead {
+  @include lead;
+
+  max-width: 560px;
+  margin: 0 0 46px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  overflow: hidden;
+  background: var(--border-subtle);
+  border: 1px solid var(--border-subtle);
+  border-radius: 14px;
+
+  @include down('md') {
+    grid-template-columns: 1fr;
+  }
+}
+
+.cell {
+  padding: 40px 34px;
+  background: #fff;
+}
+
+.value {
+  color: var(--text-primary);
+  font-family: $font-euro;
+  font-size: clamp(48px, 5vw, 68px);
+  font-weight: 900;
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+}
+
+.label {
+  @include label(12px, 0.1em);
+
+  margin-top: 14px;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+.srOnly {
+  @include visually-hidden;
+}

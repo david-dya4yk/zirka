@@ -1,0 +1,133 @@
+.section {
+  color: var(--text-primary);
+  background: var(--gray-50);
+}
+
+.inner {
+  @include container;
+
+  display: grid;
+  grid-template-columns: 0.92fr 1.08fr;
+  gap: 56px;
+  align-items: start;
+  padding-top: 96px;
+  padding-bottom: 96px;
+
+  @include down('md') {
+    grid-template-columns: 1fr;
+    gap: 36px;
+    padding-top: 64px;
+    padding-bottom: 64px;
+  }
+}
+
+.title {
+  max-width: 12ch;
+  margin: 0 0 16px;
+  color: var(--text-primary);
+  font-family: $font-display;
+  font-size: clamp(30px, 3.8vw, 50px);
+  font-weight: 900;
+  line-height: 1.02;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.lead {
+  max-width: 420px;
+  margin: 0 0 40px;
+  color: var(--text-secondary);
+  font-size: 17px;
+  line-height: 1.6;
+}
+
+.photo {
+  position: relative;
+  max-width: 420px;
+  aspect-ratio: 1.45 / 1;
+  overflow: hidden;
+  border-radius: 12px;
+
+  img {
+    object-fit: cover;
+  }
+}
+
+.fields {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px 32px;
+
+  @include down('sm') {
+    grid-template-columns: 1fr;
+  }
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.fieldWide {
+  grid-column: 1 / -1;
+}
+
+.fieldLabel {
+  color: var(--text-primary);
+  font-size: 14px;
+}
+
+.required {
+  color: var(--flame-500);
+}
+
+.input,
+.textarea {
+  padding: 8px 2px;
+  color: var(--text-primary);
+  font-family: $font-sans;
+  font-size: 15px;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--border-default);
+  border-radius: 0;
+  outline: none;
+  transition: border-color $transition-fast;
+
+  &::placeholder {
+    color: var(--gray-400);
+  }
+
+  &:focus {
+    border-bottom-color: var(--flame-500);
+  }
+}
+
+.textarea {
+  resize: vertical;
+}
+
+.submitRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 40px;
+}
+
+.consent {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  color: var(--text-secondary);
+  font-size: 14px;
+  cursor: pointer;
+
+  input {
+    width: 16px;
+    height: 16px;
+    accent-color: var(--flame-500);
+  }
+}
