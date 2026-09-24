@@ -1,0 +1,11 @@
+{
+  "extends": ["stylelint-config-standard-scss", "stylelint-config-prettier-scss"],
+  "rules": {
+    "selector-class-pattern": "^[a-z][a-zA-Z0-9]*$",
+    "scss/dollar-variable-pattern": "^[a-z][a-zA-Z0-9-]*$",
+    "custom-property-pattern": "^[a-z][a-zA-Z0-9-]*$",
+    "no-descending-specificity": null,
+    "scss/dollar-variable-empty-line-before": null
+  },
+  "ignoreFiles": [".next/**", "out/**", "build/**", "node_modules/**"]
+}
