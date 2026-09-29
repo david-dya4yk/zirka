@@ -20,10 +20,6 @@ const PILLARS = [
   },
 ] as const;
 
-// Each sticky card docks 20px lower than the previous one, so they stack like a deck.
-const STACK_TOP_PX = 118;
-const STACK_STEP_PX = 20;
-
 export function BuildSection(): React.JSX.Element {
   return (
     <section className={styles.section}>
@@ -32,7 +28,9 @@ export function BuildSection(): React.JSX.Element {
           <p className={styles.eyebrow}>[ ми ]</p>
           <h2 className={styles.title}>Будуємо самі. Від ділянки до здачі ключа.</h2>
           <p className={styles.lead}>Не залучаємо субпідрядників на ключові процеси.</p>
-          <Button size="lg">Подивитися процес будівництва →</Button>
+          <Button size="lg" className={styles.cta}>
+            Подивитися процес будівництва →
+          </Button>
         </div>
 
         <ol className={styles.cards}>
@@ -40,10 +38,11 @@ export function BuildSection(): React.JSX.Element {
             <li
               key={pillar.title}
               className={styles.card}
-              style={{ top: `${String(STACK_TOP_PX + i * STACK_STEP_PX)}px` }}
+              // Position in the sticky deck; offsets per breakpoint live in the stylesheet.
+              style={{ '--stack-index': i } as React.CSSProperties}
             >
               <span className={styles.index}>/ {String(i + 1).padStart(2, '0')}</span>
-              <div>
+              <div className={styles.cardBody}>
                 <h3 className={styles.cardTitle}>{pillar.title}</h3>
                 <p className={styles.cardText}>{pillar.text}</p>
               </div>
