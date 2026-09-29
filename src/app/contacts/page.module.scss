@@ -1,0 +1,8 @@
+// Inner pages keep the header docked while scrolling (the home page overlays it on the hero).
+.navBar {
+  position: sticky;
+  top: 0;
+  z-index: 60;
+  background: #15140f;
+  border-bottom: 1px solid rgb(255 255 255 / 8%);
+}

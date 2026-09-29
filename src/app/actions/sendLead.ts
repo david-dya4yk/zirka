@@ -16,12 +16,25 @@ function field(formData: FormData, name: string, max = MAX_FIELD): string {
   return typeof value === 'string' ? value.trim().slice(0, max) : '';
 }
 
+// Hidden `origin` field → where the form lives; unknown values fall back to the home form.
+const FORM_ORIGINS = {
+  home: 'Форма «Готові до нової квартири?» · головна',
+  contacts: 'Форма «Залиште номер — передзвонимо» · контакти',
+} as const;
+type FormOrigin = keyof typeof FORM_ORIGINS;
+
+function formOrigin(value: string): FormOrigin {
+  return Object.hasOwn(FORM_ORIGINS, value) ? (value as FormOrigin) : 'home';
+}
+
 function formatLead(lead: {
   firstName: string;
   lastName: string;
   phone: string;
   email: string;
+  interest: string;
   message: string;
+  origin: FormOrigin;
 }): string {
   const fullName = [lead.firstName, lead.lastName].filter(Boolean).join(' ');
   const submittedAt = new Intl.DateTimeFormat('uk-UA', {
@@ -38,6 +51,7 @@ function formatLead(lead: {
     `📞 <b>Телефон:</b> <code>${escapeHtml(lead.phone)}</code>`,
   ];
   if (lead.email) lines.push(`✉️ <b>Email:</b> ${escapeHtml(lead.email)}`);
+  if (lead.interest) lines.push(`🎯 <b>Цікавить:</b> ${escapeHtml(lead.interest)}`);
   if (lead.message) {
     lines.push(
       '',
@@ -49,7 +63,7 @@ function formatLead(lead: {
     '',
     '━━━━━━━━━━━━━━━━━━',
     `🕒 ${escapeHtml(submittedAt)}`,
-    '📍 Форма «Готові до нової квартири?» · головна',
+    `📍 ${FORM_ORIGINS[lead.origin]}`,
   );
   return lines.join('\n');
 }
@@ -65,7 +79,9 @@ export async function sendLead(_prev: LeadFormState, formData: FormData): Promis
     lastName: field(formData, 'lastName'),
     phone: field(formData, 'phone', 32),
     email: field(formData, 'email'),
+    interest: field(formData, 'interest'),
     message: field(formData, 'message', MAX_MESSAGE),
+    origin: formOrigin(field(formData, 'origin')),
   };
 
   if (!lead.firstName) {
@@ -82,7 +98,13 @@ export async function sendLead(_prev: LeadFormState, formData: FormData): Promis
   // if at least one of them got it.
   const [telegram, sheet] = await Promise.allSettled([
     sendTelegramMessage(formatLead(lead)),
-    appendLeadToSheet(lead),
+    appendLeadToSheet({
+      ...lead,
+      // The sheet has no column for the form's topic list, so it leads the message.
+      message: [lead.interest && `Цікавить: ${lead.interest}`, lead.message]
+        .filter(Boolean)
+        .join('\n'),
+    }),
   ]);
   if (telegram.status === 'rejected') console.error('sendLead: Telegram failed', telegram.reason);
   if (sheet.status === 'rejected') console.error('sendLead: Google Sheets failed', sheet.reason);

@@ -1,5 +1,6 @@
 import Image from 'next/image';
-import { ADDRESS, EMAIL, NAV_LINKS, PHONE, PHONE_HREF } from '../content';
+import Link from 'next/link';
+import { ADDRESS, EMAIL, NAV_LINKS, PHONE, PHONE_HREF } from '@/lib/siteContent';
 import styles from './SiteFooter.module.scss';
 
 export function SiteFooter(): React.JSX.Element {
@@ -18,9 +19,9 @@ export function SiteFooter(): React.JSX.Element {
             <nav className={styles.column} aria-label="Навігація у футері">
               <p className={styles.heading}>Навігація</p>
               {NAV_LINKS.map((link) => (
-                <a key={link.label} href={link.href} className={styles.item}>
+                <Link key={link.label} href={link.href} className={styles.item}>
                   {link.label}
-                </a>
+                </Link>
               ))}
             </nav>
             <address className={styles.column}>

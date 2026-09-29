@@ -3,7 +3,7 @@
 import Image from 'next/image';
 import { useEffect, useRef, useState } from 'react';
 import { Button } from '@/components/ui/Button';
-import { SiteNav } from '../SiteNav';
+import { SiteNav } from '@/components/layout/SiteNav';
 import { FRAME_COUNT, STAGES, frameSrc, stageIndexAt } from './stages';
 import styles from './HeroSection.module.scss';
 

@@ -45,6 +45,10 @@
   &:hover {
     color: #fff;
   }
+
+  &[aria-current='page'] {
+    color: var(--brand-accent);
+  }
 }
 
 .aside {
@@ -110,6 +114,10 @@
   letter-spacing: 0.06em;
   text-transform: uppercase;
   border-bottom: 1px solid rgb(255 255 255 / 8%);
+
+  &[aria-current='page'] {
+    color: var(--brand-accent);
+  }
 
   &:last-of-type {
     border-bottom: none;
