@@ -71,3 +71,17 @@ a.item:hover {
   font-size: 12px;
   letter-spacing: 0.5px;
 }
+
+.legal {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.legalLink {
+  transition: color $transition-fast;
+
+  &:hover {
+    color: #fff;
+  }
+}

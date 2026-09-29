@@ -1,0 +1,76 @@
+.section {
+  color: #fff;
+  background: #000;
+}
+
+.inner {
+  @include container;
+
+  padding-top: 56px;
+  padding-bottom: 60px;
+
+  @include down('md') {
+    padding-top: 40px;
+    padding-bottom: 44px;
+  }
+}
+
+.crumbs {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin-bottom: 22px;
+  color: rgb(255 255 255 / 55%);
+  font-family: $font-mono;
+  font-size: 11px;
+  letter-spacing: 1px;
+}
+
+.crumbLink {
+  transition: color $transition-fast;
+
+  &:hover {
+    color: #fff;
+  }
+}
+
+.crumbCurrent {
+  color: var(--brand-accent);
+}
+
+.title {
+  margin: 0 0 14px;
+  font-family: $font-display;
+  font-size: clamp(30px, 4vw, 48px);
+  font-weight: 900;
+  line-height: 1.05;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+}
+
+.lead {
+  max-width: 760px;
+  margin: 0;
+  color: rgb(255 255 255 / 80%);
+  font-size: 16px;
+  line-height: 1.55;
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 26px;
+  list-style: none;
+}
+
+.chip {
+  padding: 7px 12px;
+  color: rgb(255 255 255 / 75%);
+  font-family: $font-mono;
+  font-size: 11px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  border: 1px solid rgb(255 255 255 / 18%);
+  border-radius: 3px;
+}
