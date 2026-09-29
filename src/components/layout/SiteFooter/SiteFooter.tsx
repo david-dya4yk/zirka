@@ -38,7 +38,12 @@ export function SiteFooter(): React.JSX.Element {
         </div>
         <div className={styles.bottom}>
           <span>© 2005–2026 ПВКФ «ЗІРКА» · Чернівці</span>
-          <span>Правова інформація</span>
+          <div className={styles.legal}>
+            <Link href="/public-info" className={styles.legalLink}>
+              Публічна інформація
+            </Link>
+            <span>Правова інформація</span>
+          </div>
         </div>
       </div>
     </footer>

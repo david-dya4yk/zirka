@@ -5,8 +5,7 @@ import { FindUsSection } from '@/components/contacts/FindUsSection';
 import { ShowingSection } from '@/components/contacts/ShowingSection';
 import { SocialsSection } from '@/components/contacts/SocialsSection';
 import { SiteFooter } from '@/components/layout/SiteFooter';
-import { SiteNav } from '@/components/layout/SiteNav';
-import styles from './page.module.scss';
+import { StickyHeader } from '@/components/layout/StickyHeader';
 
 export const metadata: Metadata = {
   title: 'Контакти — ЗІРКА, Чернівці',
@@ -17,9 +16,7 @@ export const metadata: Metadata = {
 export default function ContactsPage(): React.JSX.Element {
   return (
     <>
-      <div className={styles.navBar}>
-        <SiteNav />
-      </div>
+      <StickyHeader />
       <main>
         <ContactsHero />
         <ContactsDirect />
