@@ -1,0 +1,1 @@
+export { ContactsDirect } from './ContactsDirect';

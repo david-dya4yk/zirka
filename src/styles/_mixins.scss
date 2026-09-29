@@ -40,6 +40,25 @@
   border: 0;
 }
 
+// 44px round outline link for messenger / social icons.
+@mixin round-icon-link {
+  @include flex-center;
+
+  width: 44px;
+  height: 44px;
+  color: var(--text-secondary);
+  border: 1px solid var(--border-default);
+  border-radius: 50%;
+  transition:
+    color vars.$transition-fast,
+    border-color vars.$transition-fast;
+
+  &:hover {
+    color: var(--brand-primary);
+    border-color: var(--brand-primary);
+  }
+}
+
 @mixin container {
   max-width: vars.$container-max;
   margin: 0 auto;

@@ -1,0 +1,50 @@
+.section {
+  color: #fff;
+  background: #000;
+}
+
+.inner {
+  @include container;
+
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 72px;
+  padding-bottom: 72px;
+
+  @include down('md') {
+    gap: 28px;
+    padding-top: 56px;
+    padding-bottom: 56px;
+  }
+}
+
+.copy {
+  max-width: 600px;
+}
+
+.title {
+  margin: 0 0 14px;
+  font-family: $font-display;
+  font-size: clamp(28px, 3.4vw, 42px);
+  font-weight: 900;
+  line-height: 1.05;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.text {
+  margin: 0;
+  color: rgb(255 255 255 / 76%);
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+// Scoped under .inner to outrank Button's own size class regardless of CSS order.
+.inner .cta {
+  @include down('sm') {
+    width: 100%;
+  }
+}

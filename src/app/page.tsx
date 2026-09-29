@@ -3,7 +3,7 @@ import { ContactSection } from '@/components/home/ContactSection';
 import { HeroSection } from '@/components/home/HeroSection';
 import { OffersSection } from '@/components/home/OffersSection';
 import { ProjectsSection } from '@/components/home/ProjectsSection';
-import { SiteFooter } from '@/components/home/SiteFooter';
+import { SiteFooter } from '@/components/layout/SiteFooter';
 import { StatsSection } from '@/components/home/StatsSection';
 
 export default function HomePage(): React.JSX.Element {

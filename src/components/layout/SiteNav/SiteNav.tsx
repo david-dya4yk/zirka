@@ -1,26 +1,34 @@
 'use client';
 
 import Image from 'next/image';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { useState } from 'react';
 import { Button } from '@/components/ui/Button';
-import { NAV_LINKS, PHONE, PHONE_HREF } from '../content';
+import { NAV_LINKS, PHONE, PHONE_HREF } from '@/lib/siteContent';
 import styles from './SiteNav.module.scss';
 
 export function SiteNav(): React.JSX.Element {
   const [menuOpen, setMenuOpen] = useState(false);
+  const pathname = usePathname();
 
   return (
     <header className={styles.header}>
       <div className={styles.row}>
-        <a href="#" className={styles.logo}>
+        <Link href="/" className={styles.logo}>
           <Image src="/images/logo-ondark.png" alt="ЗІРКА" width={45} height={38} preload />
-        </a>
+        </Link>
 
         <nav className={styles.links} aria-label="Головна навігація">
           {NAV_LINKS.map((link) => (
-            <a key={link.label} href={link.href} className={styles.link}>
+            <Link
+              key={link.label}
+              href={link.href}
+              className={styles.link}
+              aria-current={link.href === pathname ? 'page' : undefined}
+            >
               {link.label}
-            </a>
+            </Link>
           ))}
         </nav>
 
@@ -75,16 +83,17 @@ export function SiteNav(): React.JSX.Element {
       {menuOpen && (
         <nav id="mobile-menu" className={styles.mobileMenu} aria-label="Мобільна навігація">
           {NAV_LINKS.map((link) => (
-            <a
+            <Link
               key={link.label}
               href={link.href}
               className={styles.mobileLink}
+              aria-current={link.href === pathname ? 'page' : undefined}
               onClick={() => {
                 setMenuOpen(false);
               }}
             >
               {link.label}
-            </a>
+            </Link>
           ))}
           <a href={PHONE_HREF} className={styles.mobilePhone}>
             {PHONE}
