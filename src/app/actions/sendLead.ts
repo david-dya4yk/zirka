@@ -1,5 +1,6 @@
 'use server';
 
+import { appendLeadToSheet } from '@/lib/googleSheets';
 import { escapeHtml, sendTelegramMessage } from '@/lib/telegram';
 
 export interface LeadFormState {
@@ -77,10 +78,16 @@ export async function sendLead(_prev: LeadFormState, formData: FormData): Promis
     return { status: 'error', message: 'Потрібна згода з політикою конфіденційності.' };
   }
 
-  try {
-    await sendTelegramMessage(formatLead(lead));
-  } catch (err) {
-    console.error('sendLead failed', err);
+  // Telegram and the sheet are independent channels: the lead counts as received
+  // if at least one of them got it.
+  const [telegram, sheet] = await Promise.allSettled([
+    sendTelegramMessage(formatLead(lead)),
+    appendLeadToSheet(lead),
+  ]);
+  if (telegram.status === 'rejected') console.error('sendLead: Telegram failed', telegram.reason);
+  if (sheet.status === 'rejected') console.error('sendLead: Google Sheets failed', sheet.reason);
+
+  if (telegram.status === 'rejected' && sheet.status === 'rejected') {
     return {
       status: 'error',
       message: 'Не вдалося надіслати заявку. Спробуйте ще раз або зателефонуйте нам.',
