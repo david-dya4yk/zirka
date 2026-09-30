@@ -35,6 +35,7 @@
 
 .link {
   padding: 10px 14px;
+  white-space: nowrap;
   color: rgb(255 255 255 / 66%);
   font-family: $font-display;
   font-size: 12px;
@@ -48,6 +49,12 @@
 
   &[aria-current='page'] {
     color: var(--brand-accent);
+  }
+
+  // Five links + phone + CTA don't fit 1024–1279px; tighten the links there.
+  @include down('xl') {
+    padding: 10px 8px;
+    font-size: 11px;
   }
 }
 
@@ -68,7 +75,8 @@
   letter-spacing: 0.5px;
   white-space: nowrap;
 
-  @include down('lg') {
+  // Still reachable from the mobile menu, the footer and the Contacts page.
+  @include down('xl') {
     display: none;
   }
 }
