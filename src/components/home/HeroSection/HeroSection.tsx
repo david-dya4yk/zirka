@@ -98,7 +98,7 @@ export function HeroSection(): React.JSX.Element {
             Свої люди.
           </h1>
           <div className={styles.actions}>
-            <Button href="#projects" size="lg">
+            <Button href="/apartments" size="lg">
               Обрати квартиру
             </Button>
             <Button href="#about" size="lg" variant="outlineOnDark">
