@@ -20,6 +20,7 @@ function field(formData: FormData, name: string, max = MAX_FIELD): string {
 const FORM_ORIGINS = {
   home: 'Форма «Готові до нової квартири?» · головна',
   contacts: 'Форма «Залиште номер — передзвонимо» · контакти',
+  khotynska: 'Форма «Поїдемо на будмайданчик разом» · ЖК на Хотинській',
 } as const;
 type FormOrigin = keyof typeof FORM_ORIGINS;
 
