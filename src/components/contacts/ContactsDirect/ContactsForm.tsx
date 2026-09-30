@@ -53,7 +53,12 @@ export function ContactsForm(): React.JSX.Element {
         autoComplete="tel"
         required
       />
-      <select className={styles.input} name="interest" aria-label="Що цікавить" defaultValue="">
+      <select
+        className={`${styles.input} ${styles.select}`}
+        name="interest"
+        aria-label="Що цікавить"
+        defaultValue=""
+      >
         <option value="">Що цікавить</option>
         {INTERESTS.map((option) => (
           <option key={option}>{option}</option>

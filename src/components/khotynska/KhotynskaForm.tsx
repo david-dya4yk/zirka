@@ -55,7 +55,11 @@ export function KhotynskaForm(): React.JSX.Element {
       </label>
       <label className={styles.field}>
         <span className={styles.fieldLabel}>Що вас цікавить</span>
-        <select className={styles.input} name="interest" defaultValue={INTERESTS[0]}>
+        <select
+          className={`${styles.input} ${styles.select}`}
+          name="interest"
+          defaultValue={INTERESTS[0]}
+        >
           {INTERESTS.map((option) => (
             <option key={option}>{option}</option>
           ))}

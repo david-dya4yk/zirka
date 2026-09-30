@@ -1,5 +1,5 @@
-import { REQUISITES, SOCIALS } from '@/lib/siteContent';
-import { Icon } from '../icons';
+// Restore with the social links below: import { Icon } from '../icons'; and SOCIALS from siteContent.
+import { REQUISITES } from '@/lib/siteContent';
 import styles from './SocialsSection.module.scss';
 
 export function SocialsSection(): React.JSX.Element {
@@ -11,6 +11,7 @@ export function SocialsSection(): React.JSX.Element {
           <p className={styles.text}>
             Публікуємо хід будівництва, новини про ЖК, реальні фото з об&apos;єктів.
           </p>
+          {/* Social icons hidden until the real profile URLs are known (SOCIALS still has '#').
           <div className={styles.links}>
             {SOCIALS.map((s) => (
               <a
@@ -25,6 +26,7 @@ export function SocialsSection(): React.JSX.Element {
               </a>
             ))}
           </div>
+          */}
         </div>
       </section>
 
