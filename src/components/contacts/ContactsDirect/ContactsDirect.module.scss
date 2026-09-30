@@ -138,8 +138,12 @@
   }
 }
 
+.select {
+  @include select-chevron;
+}
+
 .textarea {
-  resize: vertical;
+  resize: none;
 }
 
 .consent {

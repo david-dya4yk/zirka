@@ -951,6 +951,10 @@ $subnav-h: 52px;
   }
 }
 
+.select {
+  @include select-chevron;
+}
+
 .submit {
   height: 52px;
   color: #fff;
