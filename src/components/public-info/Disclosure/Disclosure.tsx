@@ -218,7 +218,7 @@ export function Disclosure(): React.JSX.Element {
               </p>
             ))}
             <div className={styles.actions}>
-              <Button href="/#projects">Обрати квартиру</Button>
+              <Button href="/apartments">Обрати квартиру</Button>
               <Button href="/contacts" variant="outline">
                 Задати питання →
               </Button>

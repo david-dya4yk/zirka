@@ -6,7 +6,7 @@ export const ADDRESS = 'вул. Зоряна, 4, Чернівці';
 // Sections that only exist on the home page are addressed as /#id so they work from any route.
 export const NAV_LINKS = [
   { label: 'Проєкти', href: '/projects' },
-  { label: 'Обрати квартиру', href: '/#projects' },
+  { label: 'Обрати квартиру', href: '/apartments' },
   { label: 'Проектна інформація', href: '/project-info' },
   { label: 'Контакти', href: '/contacts' },
 ] as const;
