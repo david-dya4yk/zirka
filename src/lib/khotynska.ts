@@ -3,7 +3,7 @@
 
 import { FLATS } from './monData';
 
-// Final frame of the design's construction animation (1100px, sharper than /frames/039.jpg).
+// Full front render of the building.
 export const KHOTYNSKA_HERO = '/images/khotynska/facade.jpg';
 export const SALES_PHONE = '+38 (050) 939-34-96';
 export const SALES_PHONE_HREF = 'tel:+380509393496';
@@ -61,13 +61,12 @@ export const WHY = [
   },
 ] as const;
 
-// Gallery: the only render of the building is one street view, so the tiles are close-ups of it.
+// Gallery: main tile is the tall corner render, the wide front view spans the top-right cells.
 export const GALLERY = [
-  { src: KHOTYNSKA_HERO, label: 'Візуалізація фасаду' },
-  { src: '/images/khotynska/gallery-1.jpg', label: 'Фасад і балкони' },
-  { src: '/images/khotynska/gallery-2.jpg', label: 'Верхні поверхи' },
-  { src: '/images/khotynska/gallery-3.jpg', label: 'Перший поверх' },
-  { src: '/images/khotynska/gallery-4.jpg', label: 'Вид з вулиці' },
+  { src: '/images/khotynska/gallery-1.jpg', label: 'Будинок з боку вулиці' },
+  { src: KHOTYNSKA_HERO, label: 'Головний фасад' },
+  { src: '/images/khotynska/gallery-2.jpg', label: 'Вхідна група' },
+  { src: '/images/khotynska/gallery-3.jpg', label: 'Балкони та перший поверх' },
 ] as const;
 
 export const PLAN_TABS = [

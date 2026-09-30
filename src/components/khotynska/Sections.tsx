@@ -118,8 +118,8 @@ export function GallerySection(): React.JSX.Element {
             key={g.src}
             src={g.src}
             alt={g.label}
-            sizes={i === 0 ? '(max-width: 880px) 50vw, 560px' : '(max-width: 880px) 50vw, 280px'}
-            className={i === 0 ? styles.galleryMain : undefined}
+            sizes={i < 2 ? '(max-width: 880px) 100vw, 560px' : '(max-width: 880px) 50vw, 280px'}
+            className={i === 0 ? styles.galleryMain : i === 1 ? styles.galleryWide : undefined}
           />
         ))}
       </div>

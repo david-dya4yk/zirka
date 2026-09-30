@@ -468,6 +468,15 @@ $subnav-h: 52px;
   }
 }
 
+.galleryWide {
+  grid-column: span 2;
+
+  @include down('lg') {
+    grid-column: 1 / -1;
+    aspect-ratio: 16 / 9;
+  }
+}
+
 // ---------------------------------------------------------------- plans
 
 .roomGrid {
