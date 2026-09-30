@@ -83,13 +83,15 @@
   inset: 0;
 }
 
-// Soft-edged window cell; fades in quickly on hover and out slowly.
+// Soft-edged window cell; adds the lights-only layer (aligned 1:1 with the day render) on top.
+// Fades in quickly on hover and out slowly.
 .light {
   --fade: 15.28%; // pad / (1 + 2 × pad), pad = 0.22
 
   position: absolute;
   overflow: hidden;
   opacity: 0;
+  cursor: pointer;
   mix-blend-mode: plus-lighter;
   mask-image:
     linear-gradient(
