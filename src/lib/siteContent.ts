@@ -8,6 +8,7 @@ export const NAV_LINKS = [
   { label: 'Про нас', href: '/#about' },
   { label: 'Проєкти', href: '/#projects' },
   { label: 'Обрати квартиру', href: '/#projects' },
+  { label: 'Проектна інформація', href: '/project-info' },
   { label: 'Контакти', href: '/contacts' },
 ] as const;
 

@@ -148,12 +148,18 @@ export const STEPS = [
   'Реєстрація МОН на ваше імʼя',
 ] as const;
 
-// «Проектна інформація» and «Правова інформація» pages don't exist yet, so they are left out.
+// «Правова інформація» doesn't exist yet, so it is left out.
 export const DOCS = [
   {
     t: 'Публічна інформація про обʼєкт',
     s: 'Ідентифікатор, характеристики, замовник, перелік МОН',
     href: '/public-info',
+    external: false,
+  },
+  {
+    t: 'Проектна інформація',
+    s: 'Дозволи, технології, гарантії, умови передачі квартир',
+    href: '/project-info',
     external: false,
   },
   {

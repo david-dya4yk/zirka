@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { Button } from '@/components/ui/Button';
 import {
   COMMISSIONING,
@@ -184,7 +185,11 @@ export function Disclosure(): React.JSX.Element {
               ))}
             </div>
             <p className={styles.note}>
-              Графік виконання робіт та стан його виконання — у розділі «Проектна інформація».
+              Графік виконання робіт та стан його виконання — у розділі{' '}
+              <Link href="/project-info" className={styles.permitLink}>
+                «Проектна інформація»
+              </Link>
+              .
             </p>
           </Section>
 
