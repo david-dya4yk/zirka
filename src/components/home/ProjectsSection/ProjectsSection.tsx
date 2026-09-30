@@ -145,7 +145,7 @@ export function ProjectsSection(): React.JSX.Element {
               <span>Спеціальна пропозиція</span>
             </div>
             <div>
-              <Button href="#offers">Детальніше</Button>
+              <Button href="/khotynska">Детальніше</Button>
             </div>
           </div>
         </article>
