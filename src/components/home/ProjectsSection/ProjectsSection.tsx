@@ -17,7 +17,7 @@ const COMPLETED: readonly CompletedProject[] = [
   {
     name: 'ЖК на Вишневій',
     address: 'Чернівці, вул. Вишнева, 14Б',
-    image: '/images/vyshneva.jpg',
+    image: '/images/projects/vyshneva.jpg',
     badge: 'success',
     note: 'Є вільні квартири',
     forSale: true,
@@ -110,7 +110,9 @@ export function ProjectsSection(): React.JSX.Element {
               навчальний корпус Буковинського університету та клуб «Рогізна».
             </p>
           </div>
-          <Button variant="outline">Усі проєкти →</Button>
+          <Button href="/projects" variant="outline">
+            Усі проєкти →
+          </Button>
         </div>
 
         <article className={styles.featured}>

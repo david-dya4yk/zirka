@@ -21,7 +21,7 @@ export function KhotynskaHero(): React.JSX.Element {
           <nav className={styles.crumbs} aria-label="Хлібні крихти">
             <Link href="/">Головна</Link>
             <span aria-hidden="true">→</span>
-            <Link href="/#projects">Проєкти</Link>
+            <Link href="/projects">Проєкти</Link>
             <span aria-hidden="true">→</span>
             <span className={styles.crumbCurrent} aria-current="page">
               ЖК на Хотинській
