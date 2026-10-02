@@ -14,16 +14,17 @@ import {
 } from '@/components/khotynska/Sections';
 import { SiteFooter } from '@/components/layout/SiteFooter';
 import { StickyHeader } from '@/components/layout/StickyHeader';
+import { breadcrumbSchema, khotynskaSchema, pageMetadata, PAGES } from '@/lib/seo';
+import { JsonLd } from '@/components/seo/JsonLd';
 
-export const metadata: Metadata = {
-  title: 'ЖК на Хотинській — ЗІРКА, Чернівці',
-  description:
-    'Восьмиповерховий будинок на дві секції з підземним паркінгом: 80 квартир, 4-й пров. Заводський, 2, Чернівці. Планування, хід будівництва, умови придбання.',
-};
+export const metadata: Metadata = pageMetadata(PAGES.khotynska);
 
 export default function KhotynskaPage(): React.JSX.Element {
   return (
     <>
+      <JsonLd
+        data={[breadcrumbSchema('ЖК на Хотинській', PAGES.khotynska.path), khotynskaSchema()]}
+      />
       <StickyHeader />
       <main>
         <KhotynskaHero />

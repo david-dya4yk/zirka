@@ -9,13 +9,11 @@ import { FaqSection, SeoSection } from '@/components/apartments/ApartmentsInfo';
 import { ProjectsSlider } from '@/components/apartments/ProjectsSlider';
 import { SiteFooter } from '@/components/layout/SiteFooter';
 import { StickyHeader } from '@/components/layout/StickyHeader';
-import { HERO_IMAGE, HERO_LIT_IMAGE } from '@/lib/apartments';
+import { FAQ as APARTMENTS_FAQ, HERO_IMAGE, HERO_LIT_IMAGE } from '@/lib/apartments';
+import { breadcrumbSchema, faqSchema, pageMetadata, PAGES } from '@/lib/seo';
+import { JsonLd } from '@/components/seo/JsonLd';
 
-export const metadata: Metadata = {
-  title: 'Купити квартиру у Чернівцях — ЗІРКА',
-  description:
-    'Вільні 1-, 2- і 3-кімнатні квартири від забудовника ЗІРКА у Чернівцях: ЖК на Хотинській у будівництві та готові квартири у зданих ЖК. Нотаріальний договір і МОН з першого дня.',
-};
+export const metadata: Metadata = pageMetadata(PAGES.apartments);
 
 export default function ApartmentsPage(): React.JSX.Element {
   const withLights = [HERO_IMAGE, HERO_LIT_IMAGE].every((src) =>
@@ -24,6 +22,12 @@ export default function ApartmentsPage(): React.JSX.Element {
 
   return (
     <>
+      <JsonLd
+        data={[
+          breadcrumbSchema('Обрати квартиру', PAGES.apartments.path),
+          faqSchema(APARTMENTS_FAQ),
+        ]}
+      />
       <StickyHeader />
       <main>
         <ApartmentsHero withLights={withLights} />
