@@ -779,6 +779,8 @@
 }
 
 .slideMedia {
+  @include flex-center;
+
   position: relative;
   height: 170px;
   background: var(--gray-100);
@@ -786,6 +788,14 @@
   img {
     object-fit: cover;
   }
+}
+
+.slidePlaceholder {
+  color: var(--text-muted);
+  font-family: $font-mono;
+  font-size: 11px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
 }
 
 .slideBadge {

@@ -10,15 +10,16 @@ import { ProjectsSlider } from '@/components/apartments/ProjectsSlider';
 import { SiteFooter } from '@/components/layout/SiteFooter';
 import { StickyHeader } from '@/components/layout/StickyHeader';
 import { FAQ as APARTMENTS_FAQ, HERO_IMAGE, HERO_LIT_IMAGE } from '@/lib/apartments';
+import { PROJECTS } from '@/lib/projects';
 import { breadcrumbSchema, faqSchema, pageMetadata, PAGES } from '@/lib/seo';
 import { JsonLd } from '@/components/seo/JsonLd';
 
 export const metadata: Metadata = pageMetadata(PAGES.apartments);
 
 export default function ApartmentsPage(): React.JSX.Element {
-  const withLights = [HERO_IMAGE, HERO_LIT_IMAGE].every((src) =>
-    existsSync(join(process.cwd(), 'public', src)),
-  );
+  const inPublic = (src: string): boolean => existsSync(join(process.cwd(), 'public', src));
+  const withLights = [HERO_IMAGE, HERO_LIT_IMAGE].every(inPublic);
+  const imageAvailable = Object.fromEntries(PROJECTS.map((p) => [p.image, inPublic(p.image)]));
 
   return (
     <>
@@ -33,7 +34,7 @@ export default function ApartmentsPage(): React.JSX.Element {
         <ApartmentsHero withLights={withLights} />
         <ApartmentsCatalog />
         <ApartmentPlans />
-        <ProjectsSlider />
+        <ProjectsSlider imageAvailable={imageAvailable} />
         <SeoSection />
         <ApartmentsCallback />
         <FaqSection />

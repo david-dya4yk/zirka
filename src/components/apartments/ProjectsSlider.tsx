@@ -20,7 +20,12 @@ const SLIDES = [
 
 const STEP = 300;
 
-export function ProjectsSlider(): React.JSX.Element {
+export function ProjectsSlider({
+  imageAvailable,
+}: {
+  /** Which project photos exist in /public (checked on the server). */
+  imageAvailable: Readonly<Record<string, boolean>>;
+}): React.JSX.Element {
   const trackRef = useRef<HTMLDivElement>(null);
   const scroll = (dir: -1 | 1): void => {
     trackRef.current?.scrollBy({ left: dir * STEP, behavior: 'smooth' });
@@ -79,7 +84,11 @@ export function ProjectsSlider(): React.JSX.Element {
           {SLIDES.map((s) => (
             <Link key={s.name} href={s.href} className={styles.slideCard}>
               <div className={styles.slideMedia}>
-                <Image src={s.image} alt={s.name} fill sizes="280px" />
+                {imageAvailable[s.image] === false ? (
+                  <span className={styles.slidePlaceholder}>Фото фасаду</span>
+                ) : (
+                  <Image src={s.image} alt={s.name} fill sizes="280px" />
+                )}
                 <div className={styles.slideBadge}>
                   <Badge variant={s.building ? 'amber' : 'success'}>
                     {s.building ? 'У будівництві' : 'Зданий'}
