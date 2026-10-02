@@ -3,16 +3,15 @@ import { StickyHeader } from '@/components/layout/StickyHeader';
 import { SiteFooter } from '@/components/layout/SiteFooter';
 import { Disclosure } from '@/components/public-info/Disclosure';
 import { PublicInfoHero } from '@/components/public-info/PublicInfoHero';
+import { breadcrumbSchema, pageMetadata, PAGES } from '@/lib/seo';
+import { JsonLd } from '@/components/seo/JsonLd';
 
-export const metadata: Metadata = {
-  title: 'Публічна інформація — ЗІРКА, 4-й пров. Заводський, 2',
-  description:
-    "Розкриття інформації про об'єкт будівництва на 4-му пров. Заводському, 2 у Чернівцях: технічні характеристики, замовник, дозвіл, ідентифікатори майбутніх об'єктів нерухомості, умови придбання.",
-};
+export const metadata: Metadata = pageMetadata(PAGES.publicInfo);
 
 export default function PublicInfoPage(): React.JSX.Element {
   return (
     <>
+      <JsonLd data={breadcrumbSchema('Публічна інформація', PAGES.publicInfo.path)} />
       <StickyHeader />
       <main>
         <PublicInfoHero />

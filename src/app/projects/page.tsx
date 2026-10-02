@@ -7,12 +7,10 @@ import { ProjectsCatalog } from '@/components/projects/ProjectsCatalog';
 import { ProjectsCta } from '@/components/projects/ProjectsCta';
 import { ProjectsHero } from '@/components/projects/ProjectsHero';
 import { PROJECTS } from '@/lib/projects';
+import { breadcrumbSchema, pageMetadata, PAGES } from '@/lib/seo';
+import { JsonLd } from '@/components/seo/JsonLd';
 
-export const metadata: Metadata = {
-  title: 'Проєкти — ЗІРКА, Чернівці',
-  description:
-    'Житлові комплекси та громадські обʼєкти ПВКФ «ЗІРКА»: ЖК на Хотинській у будівництві, 6 зданих ЖК, учбовий корпус БНУ і клуб «Рогізна».',
-};
+export const metadata: Metadata = pageMetadata(PAGES.projects);
 
 export default function ProjectsPage(): React.JSX.Element {
   const imageAvailable = Object.fromEntries(
@@ -21,6 +19,7 @@ export default function ProjectsPage(): React.JSX.Element {
 
   return (
     <>
+      <JsonLd data={breadcrumbSchema('Проєкти', PAGES.projects.path)} />
       <StickyHeader />
       <main>
         <ProjectsHero />

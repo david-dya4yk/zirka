@@ -6,16 +6,15 @@ import { ShowingSection } from '@/components/contacts/ShowingSection';
 import { SocialsSection } from '@/components/contacts/SocialsSection';
 import { SiteFooter } from '@/components/layout/SiteFooter';
 import { StickyHeader } from '@/components/layout/StickyHeader';
+import { breadcrumbSchema, organizationSchema, pageMetadata, PAGES } from '@/lib/seo';
+import { JsonLd } from '@/components/seo/JsonLd';
 
-export const metadata: Metadata = {
-  title: 'Контакти — ЗІРКА, Чернівці',
-  description:
-    'Офіс продажу ПВКФ «ЗІРКА»: вул. Зоряна, 4, Чернівці. Пн–Пт 10:00–18:00. Телефони, месенджери, запис на показ ЖК.',
-};
+export const metadata: Metadata = pageMetadata(PAGES.contacts);
 
 export default function ContactsPage(): React.JSX.Element {
   return (
     <>
+      <JsonLd data={[breadcrumbSchema('Контакти', PAGES.contacts.path), organizationSchema()]} />
       <StickyHeader />
       <main>
         <ContactsHero />
