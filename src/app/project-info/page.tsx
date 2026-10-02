@@ -5,7 +5,6 @@ import {
   CtaSection,
   DocsSection,
   FaqSection,
-  GuaranteesSection,
   HandoverSection,
   ProjectInfoHero,
   SafetySection,
@@ -34,7 +33,6 @@ export default function ProjectInfoPage(): React.JSX.Element {
         <TechSection />
         <SafetySection />
         <HandoverSection />
-        <GuaranteesSection />
         <ServiceSection />
         <FaqSection />
         <CtaSection />

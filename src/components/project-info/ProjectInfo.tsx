@@ -2,7 +2,7 @@ import { existsSync } from 'node:fs';
 import { join } from 'node:path';
 import Link from 'next/link';
 import { Button } from '@/components/ui/Button';
-import { BUILD_TECH, DOC_TABS, FAQ, GUARANTEES, HANDOVER, SAFETY } from '@/lib/projectInfo';
+import { BUILD_TECH, DOC_TABS, FAQ, HANDOVER, SAFETY } from '@/lib/projectInfo';
 import { MESSENGERS, PHONE_HREF } from '@/lib/siteContent';
 import { DocTabs, type ResolvedTab } from './DocTabs';
 import styles from './ProjectInfo.module.scss';
@@ -129,24 +129,6 @@ export function HandoverSection(): React.JSX.Element {
             Ремонт обираєте і робите самі.
           </p>
         </aside>
-      </div>
-    </section>
-  );
-}
-
-export function GuaranteesSection(): React.JSX.Element {
-  return (
-    <section className={`${styles.section} ${styles.dark}`}>
-      <div className={styles.inner}>
-        <h2 className={`${styles.title} ${styles.titleSpaced}`}>Гарантійні зобов&apos;язання</h2>
-        <ul className={styles.guarantees}>
-          {GUARANTEES.map((g) => (
-            <li key={g.v} className={styles.guarantee}>
-              <p className={styles.guaranteeValue}>{g.v}</p>
-              <p className={styles.guaranteeText}>{g.d}</p>
-            </li>
-          ))}
-        </ul>
       </div>
     </section>
   );

@@ -17,7 +17,6 @@ export interface Project {
 // Hero slideshow: photos of completed complexes; the caption names the current one.
 export const HERO_SLIDES = [
   { src: '/images/projects/vyshneva.jpg', label: 'ЖК на Вишневій, 14Б' },
-  { src: '/images/projects/veresneva-1z.jpg', label: 'ЖК на Вересневій, 1-З' },
   { src: '/images/projects/pidkovy-11b.jpg', label: 'ЖК на Івана Підкови, 11-Б' },
   { src: '/images/projects/zavodska-56k.jpg', label: 'ЖК на Заводській, 56-К' },
 ] as const;
@@ -78,6 +77,8 @@ export const PROJECTS: readonly Project[] = [
     name: 'ЖК на Вересневій, 1-З',
     address: 'Чернівці',
     category: 'residential',
+    // TODO: add the real facade photo (the previous one showed a different building);
+    // until the file exists the cards show the «Фото фасаду» placeholder.
     image: '/images/projects/veresneva-1z.jpg',
   },
   {
