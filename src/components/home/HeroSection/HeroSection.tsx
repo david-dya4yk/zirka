@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { useEffect, useRef, useState } from 'react';
 import { Button } from '@/components/ui/Button';
 import { SiteNav } from '@/components/layout/SiteNav';
+import { COORDS_LABEL } from '@/lib/khotynska';
 import { FRAME_COUNT, STAGES, frameSrc, stageIndexAt } from './stages';
 import styles from './HeroSection.module.scss';
 
@@ -114,7 +115,7 @@ export function HeroSection(): React.JSX.Element {
           </div>
           <div className={styles.monoLabel}>ОБʼЄКТ</div>
           <div className={styles.hudObject}>ЖК НА ХОТИНСЬКІЙ</div>
-          <div className={styles.hudCoords}>48.2921° N · 25.9358° E</div>
+          <div className={styles.hudCoords}>{COORDS_LABEL}</div>
           <div className={styles.hudPlot}>ДІЛЯНКА 0,42 ГА · ВЛАСНІСТЬ</div>
           <div className={styles.hudDivider} />
           <div className={styles.monoLabel}>ЕТАП {stage.code}</div>

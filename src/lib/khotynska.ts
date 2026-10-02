@@ -7,7 +7,10 @@ import { FLATS } from './monData';
 export const KHOTYNSKA_HERO = '/images/khotynska/facade.jpg';
 export const SALES_PHONE = '+38 (050) 939-34-96';
 export const SALES_PHONE_HREF = 'tel:+380509393496';
-export const COORDS = { lat: 48.2921, lng: 25.9358 };
+// Building site pin shared by the client (the design's 48.2921, 25.9358 was ~3 km off).
+export const COORDS = { lat: 48.317129, lng: 25.9230844 };
+/** 48.3171° N · 25.9231° E */
+export const COORDS_LABEL = `${COORDS.lat.toFixed(4)}° N · ${COORDS.lng.toFixed(4)}° E`;
 export const MAPS_URL = `https://www.google.com/maps?q=${String(COORDS.lat)},${String(COORDS.lng)}`;
 export const MAP_EMBED = `https://www.google.com/maps?q=${String(COORDS.lat)},${String(COORDS.lng)}&z=16&hl=uk&output=embed`;
 export const READINESS = 15;
@@ -125,7 +128,7 @@ export const TECH = [
 ] as const;
 
 export const LOCATION_ROWS = [
-  { k: 'Координати', v: `${String(COORDS.lat)}° N · ${String(COORDS.lng)}° E`, mono: true },
+  { k: 'Координати', v: COORDS_LABEL, mono: true },
   { k: 'Відкриті стоянки', v: '9 гостьових місць', mono: false },
   { k: 'Благоустрій', v: 'Тротуари, освітлення, лавочки', mono: false },
 ] as const;
@@ -157,7 +160,7 @@ export const DOCS = [
   },
   {
     t: 'Проектна інформація',
-    s: 'Дозволи, технології, гарантії, умови передачі квартир',
+    s: 'Дозволи, технології, умови передачі квартир',
     href: '/project-info',
     external: false,
   },
