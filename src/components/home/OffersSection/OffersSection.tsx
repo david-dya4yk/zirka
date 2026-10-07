@@ -27,14 +27,12 @@ export function OffersSection(): React.JSX.Element {
 
           <article className={styles.card}>
             <div className={styles.figure}>
-              −1 <span className={styles.unit}>паркомісце</span>
+              +1 <span className={styles.unit}>м²</span>
             </div>
-            <h3 className={styles.cardTitle}>Паркомісце у подарунок</h3>
+            <h3 className={styles.cardTitle}>Площа в подарунок</h3>
             <p className={styles.cardText}>
-              У ЖК на Хотинській. Купуєте квартиру в новому ЖК у будівництві — паркомісце вже
-              включено.
+              При повній оплаті квартири від 50 м² — 1 квадратний метр у подарунок.
             </p>
-            <p className={styles.cardNote}>Кількість місць обмежена.</p>
             <div className={styles.cardAction}>
               <span className={styles.pulse}>
                 <Button href="#contact">Залишити заявку</Button>

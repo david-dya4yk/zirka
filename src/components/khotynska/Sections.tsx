@@ -141,7 +141,7 @@ export function PlansSection(): React.JSX.Element {
       </ul>
       <PlanTabs />
       <div className={styles.actions}>
-        <Button href="/public-info#identifiers">Усі квартири</Button>
+        <Button href="/apartments">Усі квартири</Button>
         <Button href="/public-info#identifiers" variant="outline">
           Перелік МОН →
         </Button>
