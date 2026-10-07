@@ -1,7 +1,6 @@
 import { existsSync } from 'node:fs';
 import { join } from 'node:path';
 import type { Metadata } from 'next';
-import { ApartmentPlans } from '@/components/apartments/ApartmentPlans';
 import { ApartmentsCallback } from '@/components/apartments/ApartmentsCallback';
 import { ApartmentsCatalog } from '@/components/apartments/ApartmentsCatalog';
 import { ApartmentsHero } from '@/components/apartments/ApartmentsHero';
@@ -33,7 +32,6 @@ export default function ApartmentsPage(): React.JSX.Element {
       <main>
         <ApartmentsHero withLights={withLights} />
         <ApartmentsCatalog />
-        <ApartmentPlans />
         <ProjectsSlider imageAvailable={imageAvailable} />
         <SeoSection />
         <ApartmentsCallback />

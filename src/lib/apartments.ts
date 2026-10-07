@@ -1,8 +1,8 @@
 // «Обрати квартиру» — copy from «ЗІРКА - Обрати квартиру» in the claude.ai/design project.
-// ЖК на Хотинській flats take their area, floor and plan from monData; ЖК на Вишневій has no
-// published flat data, so those two cards keep the design's figures.
+// The catalog lists every ЖК на Хотинській flat with its plan (data from monData); ЖК на Вишневій
+// has no published flat data or plans, so its two cards keep the design's figures and a placeholder.
 
-import { FLATS, type FlatRow } from './monData';
+import { FLATS } from './monData';
 import { flatPlan } from './publicInfo';
 
 export type ApartmentProject = 'khotynska' | 'vyshneva';
@@ -13,13 +13,17 @@ export interface Apartment {
   project: ApartmentProject;
   projectName: string;
   href: string;
-  image: string;
   status: ApartmentStatus;
   rooms: number;
   area: number;
+  livingArea?: number;
   floor: number;
   floors: number;
-  /** Extra badge on the photo, e.g. a current offer. */
+  section?: string;
+  num?: number;
+  /** Card thumbnail (the drawing cropped from the plan) and the full plan sheet. */
+  plan?: { thumb: string; full: string };
+  /** Extra badge on the card, e.g. a current offer. */
   offer?: string;
 }
 
@@ -29,8 +33,6 @@ export const HERO_IMAGE = '/images/apartments/hero.jpg';
 export const HERO_LIT_IMAGE = '/images/apartments/hero-lit.jpg';
 export const HERO_FALLBACK = '/images/khotynska/facade.jpg';
 
-// Same date as the disclosure pages (the design's «II кв.2027» predates them).
-const KHOTYNSKA_HANDOVER = 'III кв. 2029';
 const KHOTYNSKA_FLOORS = 8;
 
 export const PROJECT_OPTIONS: readonly { id: ApartmentProject; label: string }[] = [
@@ -43,38 +45,37 @@ export const STATUS_LABEL: Record<ApartmentStatus, string> = {
   building: 'У будівництві',
 };
 
-function flat(num: number): FlatRow {
-  const row = FLATS.find(([n]) => n === num);
-  if (!row) throw new Error(`Unknown flat №${String(num)}`);
-  return row;
+/** Plan drawing cropped from the full sheet to 640×640 for the catalog cards. */
+function planThumb(num: number): string {
+  return `/images/apartments/plans/kv-${String(num)}.jpg`;
 }
 
-function khotynskaApartment(num: number, image: string): Apartment {
-  const [, , floor, , area, , rooms] = flat(num);
-  return {
+// TODO: no sold/reserved list yet, so every flat is shown; filter it here once sales provides one.
+const KHOTYNSKA: readonly Apartment[] = FLATS.map(
+  ([num, section, floor, , area, livingArea, rooms]) => ({
     id: `khotynska-${String(num)}`,
     project: 'khotynska',
     projectName: 'ЖК на Хотинській',
     href: '/khotynska',
-    image,
     status: 'building',
     rooms,
     area,
+    livingArea,
     floor,
     floors: KHOTYNSKA_FLOORS,
-  };
-}
+    section,
+    num,
+    plan: { thumb: planThumb(num), full: flatPlan(num) },
+  }),
+);
 
-// TODO: the design shows four sample flats; swap in the live list of free flats when sales has one.
 export const APARTMENTS: readonly Apartment[] = [
-  khotynskaApartment(16, '/frames/039.jpg'),
-  khotynskaApartment(29, '/frames/030.jpg'),
+  ...KHOTYNSKA,
   {
     id: 'vyshneva-1',
     project: 'vyshneva',
     projectName: 'ЖК на Вишневій',
     href: '/projects',
-    image: '/images/projects/vyshneva.jpg',
     status: 'ready',
     rooms: 1,
     area: 38,
@@ -87,7 +88,6 @@ export const APARTMENTS: readonly Apartment[] = [
     project: 'vyshneva',
     projectName: 'ЖК на Вишневій',
     href: '/projects',
-    image: '/images/projects/vyshneva.jpg',
     status: 'ready',
     rooms: 2,
     area: 58,
@@ -100,32 +100,18 @@ export const SORT_OPTIONS = [
   { id: 'default', label: 'Сортування' },
   { id: 'area-desc', label: 'Більша площа' },
   { id: 'area-asc', label: 'Менша площа' },
-  { id: 'ready-first', label: 'Спочатку готові' },
 ] as const;
 export type SortId = (typeof SORT_OPTIONS)[number]['id'];
 
+/** 1 → «1-кімнатна» */
 export function roomsLabel(rooms: number): string {
-  return rooms === 1 ? '1 кімната' : `${String(rooms)} кімнати`;
+  return `${String(rooms)}-кімнатна`;
 }
 
 /** 43.15 → "43,15", 38 → "38". */
 export function formatSqm(value: number): string {
   return String(value).replace('.', ',');
 }
-
-// «Планування квартир»: one flat per layout type from both sections of ЖК на Хотинській.
-export const PLANS = [16, 29, 13, 14, 59, 60].map((num) => {
-  const [, section, floor, , area, , rooms] = flat(num);
-  return {
-    num,
-    section,
-    floor,
-    rooms,
-    title: `${String(rooms)}-кімнатна, ${area.toFixed(2).replace('.', ',')} м²`,
-    handover: KHOTYNSKA_HANDOVER,
-    image: flatPlan(num),
-  };
-});
 
 export const INTEREST_PLACEHOLDER = 'Який ЖК або тип квартири цікавить';
 export const INTERESTS = [

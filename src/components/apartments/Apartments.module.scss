@@ -17,23 +17,6 @@
   @extend %section-title;
 }
 
-// Title with a short brand-coloured rule under it.
-.titleRule {
-  @extend %section-title;
-
-  display: inline-block;
-  margin-bottom: 32px;
-
-  &::after {
-    display: block;
-    width: 64px;
-    height: 3px;
-    margin-top: 10px;
-    background: var(--brand-primary);
-    content: '';
-  }
-}
-
 .narrow {
   max-width: 880px;
   margin: 0 auto;
@@ -485,16 +468,49 @@
   border: 1px solid var(--border-subtle);
   border-radius: 14px;
   box-shadow: var(--shadow-sm);
+  transition:
+    border-color $transition-fast,
+    box-shadow $transition-base,
+    transform $transition-base;
+
+  &:hover {
+    border-color: rgb(232 87 27 / 35%);
+    box-shadow: 0 18px 40px -22px rgb(29 29 27 / 28%);
+    transform: translateY(-2px);
+  }
 }
 
-.aptMedia {
+// Plan drawing on the same grey as the plan sheets, so the crop edge disappears.
+.aptPlan {
+  @include flex-center;
+
   position: relative;
-  height: 190px;
-  background: var(--gray-100);
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  background: #e6e6e6;
+  border-bottom: 1px solid var(--border-subtle);
 
   img {
-    object-fit: cover;
+    object-fit: contain;
+    transition: transform $transition-base;
   }
+
+  &:hover img {
+    transform: scale(1.04);
+  }
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: inset var(--focus-ring);
+  }
+}
+
+.aptPlanEmpty {
+  color: var(--text-muted);
+  font-family: $font-mono;
+  font-size: 11px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
 }
 
 .aptBadges {
@@ -507,58 +523,156 @@
   justify-content: space-between;
 }
 
+.aptZoom {
+  @include flex-center;
+
+  position: absolute;
+  right: 12px;
+  bottom: 12px;
+  width: 32px;
+  height: 32px;
+  color: var(--text-primary);
+  background: rgb(255 255 255 / 92%);
+  border-radius: 50%;
+  box-shadow: var(--shadow-sm);
+  opacity: 0;
+  transition: opacity $transition-fast;
+
+  .aptPlan:hover &,
+  .aptPlan:focus-visible & {
+    opacity: 1;
+  }
+
+  @media (hover: none) {
+    opacity: 1;
+  }
+}
+
 .aptBody {
   display: flex;
   flex: 1;
   flex-direction: column;
-  gap: 6px;
-  padding: 20px;
+  padding: 18px 20px 20px;
+}
+
+.aptProject {
+  margin: 0 0 6px;
+  color: var(--text-muted);
+  font-size: 12.5px;
 }
 
 .aptTitle {
-  margin: 0;
+  margin: 0 0 14px;
   font-family: $font-display;
-  font-size: 15px;
+  font-size: 16px;
   font-weight: 900;
+  line-height: 1.2;
   letter-spacing: 0.02em;
   text-transform: uppercase;
 }
 
-.aptMeta {
+.aptFacts {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
   margin: 0;
-  color: var(--text-muted);
-  font-size: 13px;
+  padding: 12px 0;
+  border-top: 1px solid var(--border-subtle);
+  border-bottom: 1px solid var(--border-subtle);
+
+  dt {
+    margin-bottom: 3px;
+    color: var(--text-muted);
+    font-size: 11px;
+  }
+
+  dd {
+    margin: 0;
+    color: var(--text-primary);
+    font-size: 13.5px;
+    font-weight: 600;
+    white-space: nowrap;
+  }
 }
 
 .aptActions {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
   gap: 8px;
   margin-top: auto;
-  padding-top: 14px;
+  padding-top: 16px;
 }
 
-// List view: one card per row, photo on the left.
+// List view: one card per row, plan on the left.
 .aptList {
   grid-template-columns: minmax(0, 1fr);
 
   .apt {
     display: grid;
-    grid-template-columns: 260px minmax(0, 1fr);
+    grid-template-columns: 220px minmax(0, 1fr);
 
     @media (width <= 560px) {
       grid-template-columns: minmax(0, 1fr);
     }
   }
 
-  .aptMedia {
-    height: auto;
-    min-height: 170px;
+  .aptPlan {
+    border-right: 1px solid var(--border-subtle);
+    border-bottom: none;
+  }
+
+  .aptBody {
+    justify-content: center;
+  }
+
+  .aptFacts {
+    max-width: 420px;
   }
 
   .aptActions {
-    flex-flow: row wrap;
+    grid-template-columns: repeat(2, max-content);
   }
+}
+
+.more {
+  display: flex;
+  justify-content: center;
+  margin-top: 36px;
+}
+
+.moreButton {
+  display: inline-flex;
+  gap: 10px;
+  align-items: center;
+  height: 48px;
+  padding: 0 26px;
+  color: var(--text-primary);
+  font-family: $font-display;
+  font-size: 13px;
+  font-weight: 900;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  background: #fff;
+  border: 1.5px solid var(--border-default);
+  border-radius: 8px;
+  cursor: pointer;
+  transition:
+    border-color $transition-fast,
+    color $transition-fast;
+
+  &:hover {
+    color: var(--brand-primary);
+    border-color: var(--brand-primary);
+  }
+}
+
+.moreCount {
+  color: var(--text-muted);
+  font-family: $font-sans;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0;
+  text-transform: none;
 }
 
 .empty {
@@ -604,89 +718,6 @@
   &:hover {
     color: var(--text-primary);
     border-color: var(--text-muted);
-  }
-}
-
-// ---------------------------------------------------------------- plans
-
-.plans {
-  color: var(--text-primary);
-  background: #fff;
-  border-top: 1px solid var(--border-subtle);
-}
-
-.plansInner {
-  @include container;
-
-  padding-top: 72px;
-  padding-bottom: 72px;
-
-  @include down('md') {
-    padding-top: 56px;
-    padding-bottom: 56px;
-  }
-}
-
-.plansGrid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 48px 32px;
-
-  @media (width <= 1100px) {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  @media (width <= 880px) {
-    grid-template-columns: minmax(0, 1fr);
-    gap: 40px;
-  }
-}
-
-.planMedia {
-  position: relative;
-  display: block;
-  margin-bottom: 20px;
-  overflow: hidden;
-  background: var(--gray-50);
-  border: 1px solid var(--border-subtle);
-  border-radius: 12px;
-  aspect-ratio: 1 / 1;
-
-  img {
-    object-fit: contain;
-    transition: transform $transition-base;
-  }
-
-  &:hover img {
-    transform: scale(1.03);
-  }
-}
-
-.planTitle {
-  margin: 0 0 14px;
-  font-family: $font-display;
-  font-size: 19px;
-  font-weight: 900;
-  text-transform: uppercase;
-}
-
-.planFacts {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 8px 16px;
-  margin: 0;
-  color: var(--text-secondary);
-  font-size: 14px;
-
-  div {
-    display: flex;
-    gap: 4px;
-  }
-
-  dd {
-    margin: 0;
-    color: var(--text-primary);
-    font-weight: 700;
   }
 }
 

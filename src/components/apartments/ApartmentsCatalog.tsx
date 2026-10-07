@@ -68,8 +68,6 @@ function compare(sort: SortId): (a: Apartment, b: Apartment) => number {
       return (a, b) => b.area - a.area;
     case 'area-asc':
       return (a, b) => a.area - b.area;
-    case 'ready-first':
-      return (a, b) => Number(a.status !== 'ready') - Number(b.status !== 'ready');
     case 'default':
       return () => 0;
   }
@@ -146,30 +144,83 @@ function RangeInputs({
 }
 
 function ApartmentCard({ apt }: { apt: Apartment }): React.JSX.Element {
+  const title = `${roomsLabel(apt.rooms)} · ${formatSqm(apt.area)} м²`;
+  const badges = (
+    <div className={styles.aptBadges}>
+      <Badge variant={apt.status === 'ready' ? 'success' : 'amber'}>
+        {STATUS_LABEL[apt.status]}
+      </Badge>
+      {apt.offer && <Badge variant="amber">{apt.offer}</Badge>}
+    </div>
+  );
+
   return (
     <article className={styles.apt}>
-      <div className={styles.aptMedia}>
-        <Image
-          src={apt.image}
-          alt={apt.projectName}
-          fill
-          sizes="(max-width: 560px) 100vw, (max-width: 1100px) 50vw, 300px"
-        />
-        <div className={styles.aptBadges}>
-          <Badge variant={apt.status === 'ready' ? 'success' : 'amber'}>
-            {STATUS_LABEL[apt.status]}
-          </Badge>
-          {apt.offer && <Badge variant="amber">{apt.offer}</Badge>}
+      {apt.plan ? (
+        <a
+          href={apt.plan.full}
+          target="_blank"
+          rel="noreferrer"
+          className={styles.aptPlan}
+          aria-label={`Відкрити повне планування${apt.num ? ` квартири №${String(apt.num)}` : ''}`}
+        >
+          <Image
+            src={apt.plan.thumb}
+            alt={`Планування: ${title}`}
+            fill
+            sizes="(max-width: 560px) 100vw, (max-width: 1100px) 50vw, 300px"
+          />
+          {badges}
+          <span className={styles.aptZoom} aria-hidden="true">
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+            >
+              <circle cx="11" cy="11" r="7" />
+              <path d="m20 20-3.5-3.5M11 8v6M8 11h6" />
+            </svg>
+          </span>
+        </a>
+      ) : (
+        <div className={styles.aptPlan}>
+          <span className={styles.aptPlanEmpty}>Планування готується</span>
+          {badges}
         </div>
-      </div>
+      )}
       <div className={styles.aptBody}>
-        <h3 className={styles.aptTitle}>{apt.projectName}</h3>
-        <p className={styles.aptMeta}>
-          {roomsLabel(apt.rooms)} · {formatSqm(apt.area)} м² · {apt.floor} поверх з {apt.floors}
+        <p className={styles.aptProject}>
+          {apt.projectName}
+          {apt.section && ` · секція ${apt.section}`}
         </p>
+        <h3 className={styles.aptTitle}>{title}</h3>
+        <dl className={styles.aptFacts}>
+          <div>
+            <dt>Поверх</dt>
+            <dd>
+              {apt.floor} з {apt.floors}
+            </dd>
+          </div>
+          {apt.num !== undefined && (
+            <div>
+              <dt>Квартира</dt>
+              <dd>№{apt.num}</dd>
+            </div>
+          )}
+          {apt.livingArea !== undefined && (
+            <div>
+              <dt>Житлова</dt>
+              <dd>{formatSqm(apt.livingArea)} м²</dd>
+            </div>
+          )}
+        </dl>
         <div className={styles.aptActions}>
           <Button href={apt.href} variant="ghost" size="sm">
-            Детальніше
+            Про ЖК
           </Button>
           <Button href="#contact" size="sm">
             Залишити заявку
@@ -180,6 +231,8 @@ function ApartmentCard({ apt }: { apt: Apartment }): React.JSX.Element {
   );
 }
 
+const PAGE_SIZE = 12;
+
 export function ApartmentsCatalog(): React.JSX.Element {
   const [panelOpen, setPanelOpen] = useState(false);
   // Edited in the panel; the list only changes on «Показати варіанти».
@@ -187,6 +240,7 @@ export function ApartmentsCatalog(): React.JSX.Element {
   const [applied, setApplied] = useState<Filters>(NO_FILTERS);
   const [sort, setSort] = useState<SortId>('default');
   const [view, setView] = useState<'grid' | 'list'>('grid');
+  const [shown, setShown] = useState(PAGE_SIZE);
 
   const update = (patch: Partial<Filters>): void => {
     setDraft((f) => ({ ...f, ...patch }));
@@ -194,6 +248,7 @@ export function ApartmentsCatalog(): React.JSX.Element {
   const reset = (): void => {
     setDraft(NO_FILTERS);
     setApplied(NO_FILTERS);
+    setShown(PAGE_SIZE);
   };
   const toggleProject = (id: ApartmentProject): void => {
     setDraft((f) => ({
@@ -240,6 +295,7 @@ export function ApartmentsCatalog(): React.JSX.Element {
             onSubmit={(e) => {
               e.preventDefault();
               setApplied(draft);
+              setShown(PAGE_SIZE);
             }}
           >
             <div role="group" aria-label="Проєкт">
@@ -342,6 +398,7 @@ export function ApartmentsCatalog(): React.JSX.Element {
                 value={sort}
                 onChange={(e) => {
                   setSort(e.target.value as SortId);
+                  setShown(PAGE_SIZE);
                 }}
               >
                 {SORT_OPTIONS.map((o) => (
@@ -401,11 +458,29 @@ export function ApartmentsCatalog(): React.JSX.Element {
           </div>
 
           {visible.length > 0 ? (
-            <div className={`${styles.aptGrid} ${view === 'list' ? styles.aptList : ''}`}>
-              {visible.map((apt) => (
-                <ApartmentCard key={apt.id} apt={apt} />
-              ))}
-            </div>
+            <>
+              <div className={`${styles.aptGrid} ${view === 'list' ? styles.aptList : ''}`}>
+                {visible.slice(0, shown).map((apt) => (
+                  <ApartmentCard key={apt.id} apt={apt} />
+                ))}
+              </div>
+              {visible.length > shown && (
+                <div className={styles.more}>
+                  <button
+                    type="button"
+                    className={styles.moreButton}
+                    onClick={() => {
+                      setShown((n) => n + PAGE_SIZE);
+                    }}
+                  >
+                    Показати ще
+                    <span className={styles.moreCount}>
+                      {Math.min(PAGE_SIZE, visible.length - shown)} з {visible.length - shown}
+                    </span>
+                  </button>
+                </div>
+              )}
+            </>
           ) : (
             <div className={styles.empty}>
               <h3 className={styles.emptyTitle}>Відсутні квартири за вашими параметрами</h3>
