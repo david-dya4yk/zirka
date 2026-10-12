@@ -5,6 +5,8 @@ export interface DocRow {
   title: string;
   /** Path under /public (PDF) or an external URL. */
   href?: string;
+  /** Facts shown as text under the title instead of a file. */
+  details?: readonly string[];
 }
 
 export interface DocTab {
@@ -14,6 +16,8 @@ export interface DocTab {
   docs: readonly DocRow[];
   /** Completed complexes share one document set; listed as chips under it. */
   objects?: readonly string[];
+  /** Don't label rows without a file («За запитом»). */
+  hideMissing?: boolean;
 }
 
 export const DOC_TABS: readonly DocTab[] = [
@@ -22,9 +26,11 @@ export const DOC_TABS: readonly DocTab[] = [
     label: 'ЖК на Хотинській',
     note: 'У будівництві',
     docs: [
-      // ЧВ012250321873 від 26.03.2025 — published in the state register, so link there.
-      { title: 'Дозвіл на виконання будівельних робіт', href: 'https://e-construction.gov.ua/' },
-      { title: 'Право власності на земельну ділянку', href: '/docs/khotynska/pravo-vlasnosti.pdf' },
+      // ЧВ012250321873 від 26.03.2025 (also in the ЄДЕССБ register).
+      {
+        title: 'Дозвіл на виконання будівельних робіт',
+        href: '/docs/khotynska/dozvil-na-budivnytstvo.pdf',
+      },
       {
         title: 'Технічні умови (вода, тепло, електрика, каналізація)',
         href: '/docs/khotynska/tekhnichni-umovy.pdf',
@@ -33,13 +39,25 @@ export const DOC_TABS: readonly DocTab[] = [
         title: 'Містобудівні умови та обмеження',
         href: '/docs/khotynska/mistobudivni-umovy.pdf',
       },
+      {
+        title: 'Енергетичний сертифікат (клас C)',
+        href: '/docs/khotynska/enerhetychnyi-sertyfikat.pdf',
+      },
       { title: 'Свідоцтво про реєстрацію МОН', href: '/docs/khotynska/mon.pdf' },
       { title: 'Проєктна декларація', href: '/docs/khotynska/deklaratsiia.pdf' },
+      {
+        title: 'Право власності на земельні ділянки',
+        details: [
+          'Право власності від 05.05.2023 року. Номер відомостей про речове право: 50206767. Власник: ПВКФ «Зірка».',
+          'Право власності від 06.02.2024 року. Номер відомостей про речове право: 53640103. Власник: ПВКФ «Зірка».',
+        ],
+      },
     ],
   },
   {
     id: 'completed',
     label: 'Здані ЖК (6)',
+    hideMissing: true,
     note: 'Кожен зі зданих ЖК має однаковий пакет документів:',
     docs: [
       { title: 'Дозвіл на виконання будівельних робіт' },
@@ -59,6 +77,7 @@ export const DOC_TABS: readonly DocTab[] = [
   {
     id: 'public',
     label: 'Громадські обʼєкти',
+    hideMissing: true,
     docs: [
       {
         title:

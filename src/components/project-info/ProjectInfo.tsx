@@ -14,11 +14,17 @@ function resolveTabs(): ResolvedTab[] {
     label: tab.label,
     note: tab.note,
     objects: tab.objects,
+    hideMissing: tab.hideMissing,
     docs: tab.docs.map((d) => {
       const external = d.href?.startsWith('http') ?? false;
       const available =
         d.href !== undefined && (external || existsSync(join(process.cwd(), 'public', d.href)));
-      return { title: d.title, href: available ? (d.href ?? null) : null, external };
+      return {
+        title: d.title,
+        href: available ? (d.href ?? null) : null,
+        external,
+        details: d.details,
+      };
     }),
   }));
 }
