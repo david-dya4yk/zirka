@@ -18,7 +18,12 @@ function resolveTabs(): ResolvedTab[] {
       const external = d.href?.startsWith('http') ?? false;
       const available =
         d.href !== undefined && (external || existsSync(join(process.cwd(), 'public', d.href)));
-      return { title: d.title, href: available ? (d.href ?? null) : null, external };
+      return {
+        title: d.title,
+        href: available ? (d.href ?? null) : null,
+        external,
+        details: d.details,
+      };
     }),
   }));
 }

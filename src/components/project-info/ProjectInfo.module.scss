@@ -253,6 +253,18 @@
   }
 }
 
+.docDetails {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin: 8px 0 0;
+  padding: 0;
+  color: var(--text-secondary);
+  font-size: 13.5px;
+  line-height: 1.5;
+  list-style: none;
+}
+
 .docMissing {
   flex: none;
   color: var(--text-muted);

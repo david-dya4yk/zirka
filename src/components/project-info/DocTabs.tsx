@@ -8,6 +8,7 @@ export interface ResolvedDoc {
   /** Set when the file exists in /public or the link is external. */
   href: string | null;
   external: boolean;
+  details?: readonly string[] | undefined;
 }
 
 export interface ResolvedTab {
@@ -67,13 +68,24 @@ export function DocTabs({ tabs }: { tabs: readonly ResolvedTab[] }): React.JSX.E
           <ul className={styles.docList}>
             {tab.docs.map((d) => (
               <li key={d.title} className={styles.docRow}>
-                <span>{d.title}</span>
+                <div>
+                  <span>{d.title}</span>
+                  {d.details && (
+                    <ul className={styles.docDetails}>
+                      {d.details.map((line) => (
+                        <li key={line}>{line}</li>
+                      ))}
+                    </ul>
+                  )}
+                </div>
                 {d.href ? (
                   <a
                     href={d.href}
                     className={styles.docLink}
                     target="_blank"
                     rel="noopener noreferrer"
+                    // Our own PDFs save to disk; register links just open.
+                    download={d.external ? undefined : ''}
                   >
                     {d.external ? (
                       'ЄДЕССБ →'
@@ -84,7 +96,7 @@ export function DocTabs({ tabs }: { tabs: readonly ResolvedTab[] }): React.JSX.E
                       </>
                     )}
                   </a>
-                ) : (
+                ) : d.details ? null : (
                   <span className={styles.docMissing}>
                     {tab.objects ? `PDF · ${String(tab.objects.length)} файлів` : 'За запитом'}
                   </span>
