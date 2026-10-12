@@ -14,6 +14,7 @@ function resolveTabs(): ResolvedTab[] {
     label: tab.label,
     note: tab.note,
     objects: tab.objects,
+    hideMissing: tab.hideMissing,
     docs: tab.docs.map((d) => {
       const external = d.href?.startsWith('http') ?? false;
       const available =

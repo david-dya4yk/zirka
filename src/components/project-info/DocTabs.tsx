@@ -17,6 +17,7 @@ export interface ResolvedTab {
   note?: string | undefined;
   docs: readonly ResolvedDoc[];
   objects?: readonly string[] | undefined;
+  hideMissing?: boolean | undefined;
 }
 
 function DownloadIcon(): React.JSX.Element {
@@ -96,10 +97,8 @@ export function DocTabs({ tabs }: { tabs: readonly ResolvedTab[] }): React.JSX.E
                       </>
                     )}
                   </a>
-                ) : d.details ? null : (
-                  <span className={styles.docMissing}>
-                    {tab.objects ? `PDF · ${String(tab.objects.length)} файлів` : 'За запитом'}
-                  </span>
+                ) : d.details || tab.hideMissing ? null : (
+                  <span className={styles.docMissing}>За запитом</span>
                 )}
               </li>
             ))}

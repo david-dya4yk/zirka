@@ -16,6 +16,8 @@ export interface DocTab {
   docs: readonly DocRow[];
   /** Completed complexes share one document set; listed as chips under it. */
   objects?: readonly string[];
+  /** Don't label rows without a file («За запитом»). */
+  hideMissing?: boolean;
 }
 
 export const DOC_TABS: readonly DocTab[] = [
@@ -55,6 +57,7 @@ export const DOC_TABS: readonly DocTab[] = [
   {
     id: 'completed',
     label: 'Здані ЖК (6)',
+    hideMissing: true,
     note: 'Кожен зі зданих ЖК має однаковий пакет документів:',
     docs: [
       { title: 'Дозвіл на виконання будівельних робіт' },
@@ -74,6 +77,7 @@ export const DOC_TABS: readonly DocTab[] = [
   {
     id: 'public',
     label: 'Громадські обʼєкти',
+    hideMissing: true,
     docs: [
       {
         title:
