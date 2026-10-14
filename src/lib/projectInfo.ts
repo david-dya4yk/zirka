@@ -32,7 +32,7 @@ export const DOC_TABS: readonly DocTab[] = [
         href: '/docs/khotynska/dozvil-na-budivnytstvo.pdf',
       },
       {
-        title: 'Технічні умови (вода, тепло, електрика, каналізація)',
+        title: 'Технічні умови 4-й провулок Заводський, 2',
         href: '/docs/khotynska/tekhnichni-umovy.pdf',
       },
       {
