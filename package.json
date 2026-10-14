@@ -9,7 +9,7 @@
     "dev": "next dev -p 3001",
     "prebuild": "npm run scss:types",
     "build": "next build",
-    "start": "next start",
+    "start": "next start -p 3001",
     "pretypecheck": "npm run scss:types",
     "typecheck": "tsc --noEmit",
     "prelint": "npm run scss:types",
