@@ -11,7 +11,7 @@ const vercelHost = process.env['VERCEL_PROJECT_PRODUCTION_URL'];
 /** Production origin: NEXT_PUBLIC_SITE_URL, else the Vercel production domain. */
 export const SITE_URL = (
   process.env['NEXT_PUBLIC_SITE_URL'] ??
-  (vercelHost ? `https://${vercelHost}` : 'http://localhost:3000')
+  (vercelHost ? `https://${vercelHost}` : 'http://localhost:3001')
 ).replace(/\/$/, '');
 
 export const SITE_NAME = 'ЗІРКА';
