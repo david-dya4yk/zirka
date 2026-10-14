@@ -6,7 +6,7 @@
     "scss:types": "typed-scss-modules \"src/**/*.module.scss\" --exportType default --nameFormat none --quoteType single --includePaths src/styles --additionalData \"@use 'index' as *;\" --logLevel error",
     "scss:types:watch": "typed-scss-modules \"src/**/*.module.scss\" --exportType default --nameFormat none --quoteType single --includePaths src/styles --additionalData \"@use 'index' as *;\" --logLevel error --watch",
     "predev": "npm run scss:types",
-    "dev": "next dev",
+    "dev": "next dev -p 3001",
     "prebuild": "npm run scss:types",
     "build": "next build",
     "start": "next start",
