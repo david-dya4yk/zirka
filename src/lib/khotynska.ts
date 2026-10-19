@@ -19,7 +19,7 @@ export const HERO_STATS = [
   { v: String(FLATS.length), k: 'Квартир' },
   { v: '8', k: 'Поверхів · 2 секції' },
   { v: '43', k: 'Паркомісця' },
-  { v: 'від 900 $', k: 'За м²' },
+  { v: '2,8 м', k: 'Висота стель' },
 ] as const;
 
 export const ANCHORS = [
