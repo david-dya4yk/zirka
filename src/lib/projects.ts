@@ -14,12 +14,14 @@ export interface Project {
   cta?: { label: string; href: string };
 }
 
-// Hero slideshow: photos of completed complexes; the caption names the current one.
+// Hero slideshow: photos of completed objects in this order; the caption names the current one.
 export const HERO_SLIDES = [
-  { src: '/images/projects/vyshneva.jpg', label: 'ЖК на Вишневій, 14Б' },
-  { src: '/images/projects/veresneva.jpg', label: 'ЖК на Вересневій, 1-З' },
-  { src: '/images/projects/pidkovy-11b.jpg', label: 'ЖК на Івана Підкови, 11-Б' },
+  { src: '/images/projects/pidkovy-11b-facade.jpg', label: 'ЖК на Івана Підкови, 11-Б' },
+  { src: '/images/projects/vyshneva-facade.jpg', label: 'ЖК на Вишневій, 14Б' },
+  { src: '/images/rohizna.jpg', label: 'Клуб «Рогізна»' },
+  { src: '/images/bnu.jpg', label: 'Учбовий корпус БНУ' },
   { src: '/images/projects/zavodska-56k.jpg', label: 'ЖК на Заводській, 56-К' },
+  { src: '/images/projects/pidkovy-11a.jpg', label: 'ЖК на Івана Підкови, 11-А' },
 ] as const;
 
 export const HERO_CHIPS = [
@@ -36,7 +38,7 @@ export const FEATURED = {
   kicker: 'Новий проєкт · комфорт-клас',
   text: 'Новий ЖК комфорт-класу на стадії активного будівництва. Усі продажі — через нотаріальне посвідчення договору купівлі-продажу та реєстрацію МОН.',
   // The design says «здача 2027–2028»; the disclosure pages state III кв. 2029, so that wins.
-  location: 'Чернівці, 4-й пров. Заводський, 2 · здача III кв. 2029',
+  location: 'Чернівці, 4-й провулок Заводський, 2 · здача III кв. 2029',
   href: '/khotynska',
 } as const;
 
@@ -45,7 +47,7 @@ export const PROJECTS: readonly Project[] = [
     name: 'ЖК на Вишневій',
     address: 'Чернівці, вул. Вишнева, 14Б',
     category: 'residential',
-    image: '/images/projects/vyshneva.jpg',
+    image: '/images/projects/vyshneva-facade.jpg',
     text: 'Зданий житловий комплекс — можна оглянути сьогодні. Деякі квартири ще доступні.',
     offer: '+3 м²',
     cta: { label: 'Вільні квартири →', href: '/contacts#contact' },
@@ -72,13 +74,13 @@ export const PROJECTS: readonly Project[] = [
     name: 'ЖК на Івана Підкови, 11-Б',
     address: 'Чернівці',
     category: 'residential',
-    image: '/images/projects/pidkovy-11b.jpg',
+    image: '/images/projects/pidkovy-11b-facade.jpg',
   },
   {
     name: 'ЖК на Вересневій, 1-З',
     address: 'Чернівці',
     category: 'residential',
-    image: '/images/projects/veresneva.jpg',
+    image: '/images/projects/veresneva-facade.jpg',
   },
   {
     name: 'Учбовий корпус БНУ',
