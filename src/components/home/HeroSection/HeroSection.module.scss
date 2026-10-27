@@ -1,6 +1,5 @@
 // Left edge of the 1280px content column, so hero overlays align with sections below.
 $content-left: max(#{$gutter}, calc((100vw - #{$container-max}) / 2 + #{$gutter}));
-$grid-step: 86px;
 
 .track {
   position: relative;
@@ -20,52 +19,13 @@ $grid-step: 86px;
   object-fit: cover;
 }
 
-.grid {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  background: #8a847a;
-  opacity: 0.1;
-  pointer-events: none;
-  mask:
-    repeating-linear-gradient(0deg, #000 0 1px, transparent 1px $grid-step),
-    repeating-linear-gradient(90deg, #000 0 1px, transparent 1px $grid-step);
-}
-
-.gridSpot {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  pointer-events: none;
-  mask: radial-gradient(
-    circle 240px at var(--mx, -600px) var(--my, -600px),
-    #000 0%,
-    rgb(0 0 0 / 60%) 42%,
-    transparent 72%
-  );
-}
-
-.gridSpotLines {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(125deg, #e8571b 0%, #fd9b00 50%, #ffc003 100%);
-  opacity: 0.6;
-  mask:
-    repeating-linear-gradient(0deg, #000 0 1.4px, transparent 1.4px $grid-step),
-    repeating-linear-gradient(90deg, #000 0 1.4px, transparent 1.4px $grid-step);
-}
-
+// Darkens the left half of the screen, under the headline and buttons.
 .scrim {
   position: absolute;
   inset: 0;
   z-index: 3;
+  background: linear-gradient(90deg, rgb(15 12 8 / 72%) 0%, rgb(15 12 8 / 0%) 50%);
   pointer-events: none;
-  background: linear-gradient(
-    90deg,
-    rgb(15 12 8 / 76%),
-    rgb(20 19 17 / 34%) 56%,
-    rgb(20 19 17 / 6%) 100%
-  );
 }
 
 .navLayer {
@@ -74,17 +34,6 @@ $grid-step: 86px;
   right: 0;
   left: 0;
   z-index: 5;
-}
-
-.topShade {
-  position: absolute;
-  top: 0;
-  right: 0;
-  left: 0;
-  z-index: 3;
-  height: 10%;
-  background: linear-gradient(rgb(20 19 17 / 50%) 0%, rgb(20 19 17 / 0%) 100%);
-  pointer-events: none;
 }
 
 .eyebrow {

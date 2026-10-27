@@ -40,13 +40,12 @@ export const DOC_TABS: readonly DocTab[] = [
         href: '/docs/khotynska/mistobudivni-umovy.pdf',
       },
       {
-        title: 'Енергетичний сертифікат (клас C)',
+        title: 'Енергетичний сертифікат (клас B)',
         href: '/docs/khotynska/enerhetychnyi-sertyfikat.pdf',
       },
       { title: 'Свідоцтво про реєстрацію МОН', href: '/docs/khotynska/mon.pdf' },
-      { title: 'Проєктна декларація', href: '/docs/khotynska/deklaratsiia.pdf' },
       {
-        title: 'Право власності на земельні ділянки',
+        title: 'Земельні ділянки',
         details: [
           'Право власності від 05.05.2023 року. Номер відомостей про речове право: 50206767. Власник: ПВКФ «Зірка».',
           'Право власності від 06.02.2024 року. Номер відомостей про речове право: 53640103. Власник: ПВКФ «Зірка».',
