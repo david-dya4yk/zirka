@@ -13,7 +13,6 @@ const PROGRESS_EPSILON = 0.0015;
 
 export function HeroSection(): React.JSX.Element {
   const trackRef = useRef<HTMLElement>(null);
-  const spotRef = useRef<HTMLDivElement>(null);
   const [progress, setProgress] = useState(0);
 
   // Warm the browser cache so frame swaps don't flash while scrolling.
@@ -41,22 +40,13 @@ export function HeroSection(): React.JSX.Element {
       if (raf === 0) raf = requestAnimationFrame(update);
     };
 
-    const onMouseMove = (e: MouseEvent): void => {
-      const spot = spotRef.current;
-      if (!spot) return;
-      spot.style.setProperty('--mx', `${String(e.clientX)}px`);
-      spot.style.setProperty('--my', `${String(e.clientY)}px`);
-    };
-
     schedule();
     window.addEventListener('scroll', schedule, { passive: true });
     window.addEventListener('resize', schedule);
-    window.addEventListener('mousemove', onMouseMove, { passive: true });
     return () => {
       cancelAnimationFrame(raf);
       window.removeEventListener('scroll', schedule);
       window.removeEventListener('resize', schedule);
-      window.removeEventListener('mousemove', onMouseMove);
     };
   }, []);
 
@@ -80,13 +70,7 @@ export function HeroSection(): React.JSX.Element {
           fetchPriority="high"
         />
 
-        <div className={styles.grid} aria-hidden="true" />
-        <div ref={spotRef} className={styles.gridSpot} aria-hidden="true">
-          <div className={styles.gridSpotLines} />
-        </div>
-
         <div className={styles.scrim} aria-hidden="true" />
-        <div className={styles.topShade} aria-hidden="true" />
 
         <p className={styles.eyebrow}>[ ЗАБУДОВНИК ПОВНОГО ЦИКЛУ · З 2005 ]</p>
 
