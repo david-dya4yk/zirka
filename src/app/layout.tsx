@@ -9,6 +9,7 @@ import {
   THEME_COLOR,
   TITLE_SUFFIX,
 } from '@/lib/seo';
+import { HashFocus } from '@/components/layout/HashFocus';
 import '@/styles/globals.scss';
 
 const montserrat = Montserrat({
@@ -65,7 +66,10 @@ export default function RootLayout({
       lang="uk"
       className={`${montserrat.variable} ${sourceCodePro.variable} ${eurostile.variable}`}
     >
-      <body>{children}</body>
+      <body>
+        {children}
+        <HashFocus />
+      </body>
     </html>
   );
 }
