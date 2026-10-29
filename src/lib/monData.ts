@@ -8,6 +8,11 @@ export type FlatRow = readonly [number, string, number, string, number, number, 
 /** [номер, поверх, ID suffix, загальна м²] */
 export type UnitRow = readonly [string, string, string, number];
 
+/** Numbers of flats already sold; marked with «+» in the disclosure table. */
+export const SOLD_FLATS: ReadonlySet<number> = new Set([
+  12, 16, 17, 18, 23, 27, 28, 34, 50, 54, 55, 59, 60, 61, 63, 64, 67, 71,
+]);
+
 export const FLATS: readonly FlatRow[] = [
   [1, '1', 1, '9523.84', 36.8, 14.6, 1],
   [2, '1', 1, '9524.88', 43.55, 14.5, 1],

@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import { useState } from 'react';
-import { FLATS, MON_PREFIX, PARKING, STORAGE, type UnitRow } from '@/lib/monData';
+import { FLATS, MON_PREFIX, PARKING, SOLD_FLATS, STORAGE, type UnitRow } from '@/lib/monData';
 import { flatPlan, formatArea, formatTotal } from '@/lib/publicInfo';
 import styles from './Disclosure.module.scss';
 
@@ -31,8 +31,9 @@ const TABS: readonly { id: Tab; label: string; count: number; total: string }[] 
   },
 ];
 
-// Nothing is marked as sold yet; the column is required by the disclosure rules.
+// The «Продано» column is required by the disclosure rules: «+» for sold, «—» otherwise.
 const NOT_SOLD = '—';
+const SOLD = '+';
 
 function UnitsTable({ rows }: { rows: readonly UnitRow[] }): React.JSX.Element {
   return (
@@ -132,7 +133,11 @@ export function IdentifiersTabs(): React.JSX.Element {
                       <td className={styles.right}>{formatArea(total)}</td>
                       <td className={styles.right}>{formatArea(living)}</td>
                       <td className={styles.right}>{rooms}</td>
-                      <td className={`${styles.center} ${styles.muted}`}>{NOT_SOLD}</td>
+                      {SOLD_FLATS.has(num) ? (
+                        <td className={`${styles.center} ${styles.strong}`}>{SOLD}</td>
+                      ) : (
+                        <td className={`${styles.center} ${styles.muted}`}>{NOT_SOLD}</td>
+                      )}
                     </tr>
                   );
                 })}
