@@ -1,8 +1,8 @@
 // «Обрати квартиру» — copy from «ЗІРКА - Обрати квартиру» in the claude.ai/design project.
-// The catalog lists every ЖК на Хотинській flat with its plan (data from monData); ЖК на Вишневій
+// The catalog lists every unsold ЖК на Хотинській flat with its plan (data from monData); ЖК на Вишневій
 // has no published flat data or plans, so its two cards keep the design's figures and a placeholder.
 
-import { FLATS } from './monData';
+import { FLATS, SOLD_FLATS } from './monData';
 import { flatPlan } from './publicInfo';
 
 export type ApartmentProject = 'khotynska' | 'vyshneva';
@@ -50,8 +50,8 @@ function planThumb(num: number): string {
   return `/images/apartments/plans/kv-${String(num)}.jpg`;
 }
 
-// TODO: no sold/reserved list yet, so every flat is shown; filter it here once sales provides one.
-const KHOTYNSKA: readonly Apartment[] = FLATS.map(
+// Sold flats («+» in the /public-info table) are left out of the catalog.
+const KHOTYNSKA: readonly Apartment[] = FLATS.filter(([num]) => !SOLD_FLATS.has(num)).map(
   ([num, section, floor, , area, livingArea, rooms]) => ({
     id: `khotynska-${String(num)}`,
     project: 'khotynska',
