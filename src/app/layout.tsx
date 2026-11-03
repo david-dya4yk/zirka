@@ -29,6 +29,9 @@ const eurostile = localFont({
   display: 'swap',
 });
 
+// Google Search Console «HTML tag» method: the content="…" value from the verification meta tag.
+const googleVerification = process.env['GOOGLE_SITE_VERIFICATION'];
+
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: { default: PAGES.home.title, template: `%s${TITLE_SUFFIX}` },
@@ -52,6 +55,9 @@ export const metadata: Metadata = {
     follow: true,
     googleBot: { index: true, follow: true, 'max-image-preview': 'large', 'max-snippet': -1 },
   },
+  ...(googleVerification === undefined || googleVerification === ''
+    ? {}
+    : { verification: { google: googleVerification } }),
 };
 
 export const viewport: Viewport = {
