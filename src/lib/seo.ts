@@ -1,17 +1,17 @@
 // Site-wide SEO: base URL, per-page metadata (canonical, Open Graph, Twitter) and schema.org data.
-// Each route's share image comes from its opengraph-image.tsx (see lib/ogImage.tsx).
+// Each route's share image is its static opengraph-image.jpg (+ .alt.txt), JPEG to stay small for messengers.
 
 import type { Metadata } from 'next';
 import { COORDS, KHOTYNSKA_HERO } from './khotynska';
 import { FLATS } from './monData';
 import { ADDRESS, EMAIL, PHONE, PHONE_2, REQUISITES } from './siteContent';
 
-const vercelHost = process.env['VERCEL_PROJECT_PRODUCTION_URL'];
-
-/** Production origin: NEXT_PUBLIC_SITE_URL, else the Vercel production domain. */
+/**
+ * Production origin for canonical URLs, the sitemap and share images. Fixed so a build without
+ * env vars (the self-hosted server) never points Google at localhost; override with NEXT_PUBLIC_SITE_URL.
+ */
 export const SITE_URL = (
-  process.env['NEXT_PUBLIC_SITE_URL'] ??
-  (vercelHost ? `https://${vercelHost}` : 'http://localhost:3001')
+  process.env['NEXT_PUBLIC_SITE_URL'] ?? 'https://zirka-developer.com'
 ).replace(/\/$/, '');
 
 export const SITE_NAME = 'ЗІРКА';
