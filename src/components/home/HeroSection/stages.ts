@@ -13,8 +13,11 @@ export function frameAt(set: FrameSet, progress: number): number {
   return Math.round(progress * (FRAME_SETS[set].count - 1));
 }
 
+// Frames are cached for a year (next.config.ts); bump this whenever the files are replaced.
+const FRAMES_VERSION = 2;
+
 export function frameSrc(set: FrameSet, index: number): string {
-  return `/frames/${FRAME_SETS[set].dir}/${String(index).padStart(3, '0')}.webp`;
+  return `/frames/${FRAME_SETS[set].dir}/${String(index).padStart(3, '0')}.webp?v=${String(FRAMES_VERSION)}`;
 }
 
 export interface Stage {
