@@ -4,7 +4,8 @@ import { useEffect, useRef, useState } from 'react';
 import { Button } from '@/components/ui/Button';
 import { SiteNav } from '@/components/layout/SiteNav';
 import { COORDS_LABEL } from '@/lib/khotynska';
-import { FRAME_SETS, MOBILE_FRAMES_QUERY, STAGES, frameAt, frameSrc, stageIndexAt } from './stages';
+import { FrameSequence } from './frameSequence';
+import { MOBILE_FRAMES_QUERY, STAGES, frameSrc, stageIndexAt } from './stages';
 import styles from './HeroSection.module.scss';
 
 // Ignore sub-pixel scroll changes so the HUD doesn't re-render on every tick.
@@ -12,18 +13,14 @@ const PROGRESS_EPSILON = 0.0015;
 
 export function HeroSection(): React.JSX.Element {
   const trackRef = useRef<HTMLElement>(null);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
   const [progress, setProgress] = useState(0);
 
-  // Warm the browser cache with the set this screen shows, so frame swaps don't flash.
   useEffect(() => {
-    const set = window.matchMedia(MOBILE_FRAMES_QUERY).matches ? 'mobile' : 'desktop';
-    for (let i = 1; i < FRAME_SETS[set].count; i++) {
-      const img = new window.Image();
-      img.src = frameSrc(set, i);
-    }
-  }, []);
-
-  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const media = window.matchMedia(MOBILE_FRAMES_QUERY);
+    let sequence = new FrameSequence(canvas, media.matches ? 'mobile' : 'desktop');
     let raf = 0;
 
     const update = (): void => {
@@ -33,6 +30,8 @@ export function HeroSection(): React.JSX.Element {
       const rect = track.getBoundingClientRect();
       const scrollable = rect.height - window.innerHeight;
       const next = scrollable > 0 ? Math.min(1, Math.max(0, -rect.top / scrollable)) : 0;
+      // The frame repaints straight on the canvas; React only re-renders the HUD.
+      sequence.seek(next);
       setProgress((prev) => (Math.abs(prev - next) > PROGRESS_EPSILON ? next : prev));
     };
 
@@ -40,13 +39,28 @@ export function HeroSection(): React.JSX.Element {
       if (raf === 0) raf = requestAnimationFrame(update);
     };
 
+    const onResize = (): void => {
+      sequence.resize();
+      schedule();
+    };
+
+    // Rotating a phone switches between the portrait and landscape renders.
+    const onMediaChange = (): void => {
+      sequence.dispose();
+      sequence = new FrameSequence(canvas, media.matches ? 'mobile' : 'desktop');
+      schedule();
+    };
+
     schedule();
     window.addEventListener('scroll', schedule, { passive: true });
-    window.addEventListener('resize', schedule);
+    window.addEventListener('resize', onResize);
+    media.addEventListener('change', onMediaChange);
     return () => {
       cancelAnimationFrame(raf);
+      sequence.dispose();
       window.removeEventListener('scroll', schedule);
-      window.removeEventListener('resize', schedule);
+      window.removeEventListener('resize', onResize);
+      media.removeEventListener('change', onMediaChange);
     };
   }, []);
 
@@ -58,19 +72,18 @@ export function HeroSection(): React.JSX.Element {
   return (
     <section ref={trackRef} className={styles.track} aria-label="Хід будівництва">
       <div className={styles.stage}>
-        {/* Full-resolution frames straight from /public: the image optimizer would soften them. */}
+        {/* First frame, server-rendered (and the LCP image) until the canvas has drawn. Full
+            resolution straight from /public: the image optimizer would soften it. */}
         <picture>
-          <source
-            media={MOBILE_FRAMES_QUERY}
-            srcSet={frameSrc('mobile', frameAt('mobile', progress))}
-          />
+          <source media={MOBILE_FRAMES_QUERY} srcSet={frameSrc('mobile', 0)} />
           <img
             className={styles.frame}
-            src={frameSrc('desktop', frameAt('desktop', progress))}
+            src={frameSrc('desktop', 0)}
             alt="Хід будівництва ЖК на Хотинській"
             fetchPriority="high"
           />
         </picture>
+        <canvas ref={canvasRef} className={styles.canvas} aria-hidden="true" />
 
         <div className={styles.scrim} aria-hidden="true" />
 
