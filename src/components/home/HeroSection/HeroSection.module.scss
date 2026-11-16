@@ -15,7 +15,11 @@ $content-left: max(#{$gutter}, calc((100vw - #{$container-max}) / 2 + #{$gutter}
 }
 
 .frame {
+  position: absolute;
+  inset: 0;
   z-index: 0;
+  width: 100%;
+  height: 100%;
   object-fit: cover;
 }
 

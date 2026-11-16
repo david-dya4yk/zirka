@@ -1,5 +1,16 @@
+$menu-bg: rgb(15 14 11 / 97%);
+
 .header {
   position: relative;
+  background: rgb(15 14 11 / 0%);
+  transition: background-color $transition-base;
+
+  // With the mobile menu open, the bar takes the menu's colour so both read as one panel.
+  &.open {
+    @include down('lg') {
+      background: $menu-bg;
+    }
+  }
 }
 
 .row {
@@ -98,6 +109,26 @@
   }
 }
 
+// Burger lines fold into a cross while the menu is open (rotated around the icon centre).
+.bar {
+  transform-origin: 12px 12px;
+  transition:
+    transform $transition-base,
+    opacity $transition-fast;
+
+  .open &:nth-child(1) {
+    transform: rotate(45deg) translateY(5px);
+  }
+
+  .open &:nth-child(2) {
+    opacity: 0;
+  }
+
+  .open &:nth-child(3) {
+    transform: rotate(-45deg) translateY(-5px);
+  }
+}
+
 .mobileMenu {
   position: absolute;
   top: 72px;
@@ -106,11 +137,19 @@
   display: flex;
   flex-direction: column;
   padding: 8px $gutter-mobile 20px;
-  background: rgb(15 14 11 / 97%);
+  background: $menu-bg;
   border-top: 1px solid rgb(255 255 255 / 8%);
+  animation: menu-in $transition-base;
 
   @include up('lg') {
     display: none;
+  }
+}
+
+@keyframes menu-in {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
   }
 }
 

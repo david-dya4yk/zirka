@@ -55,6 +55,20 @@
   width: var(--box-w);
   aspect-ratio: 3 / 2;
   transform: translateX(-50%);
+
+  // Tapping the windows shouldn't flash a highlight, select the render or offer to save it.
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  user-select: none;
+
+  * {
+    -webkit-tap-highlight-color: transparent;
+    outline: none;
+  }
+
+  img {
+    -webkit-user-drag: none;
+  }
 }
 
 .heroFallback {

@@ -13,7 +13,7 @@ export function SiteNav(): React.JSX.Element {
   const pathname = usePathname();
 
   return (
-    <header className={styles.header}>
+    <header className={`${styles.header} ${menuOpen ? styles.open : ''}`}>
       <div className={styles.row}>
         <Link href="/" className={styles.logo}>
           <Image src="/images/logo-ondark.png" alt="ЗІРКА" width={45} height={38} preload />
@@ -55,7 +55,7 @@ export function SiteNav(): React.JSX.Element {
           <button
             type="button"
             className={styles.toggle}
-            aria-label="Меню"
+            aria-label={menuOpen ? 'Закрити меню' : 'Меню'}
             aria-expanded={menuOpen}
             aria-controls="mobile-menu"
             onClick={() => {
@@ -72,9 +72,9 @@ export function SiteNav(): React.JSX.Element {
               strokeLinecap="round"
               aria-hidden="true"
             >
-              <line x1="4" y1="7" x2="20" y2="7" />
-              <line x1="4" y1="12" x2="20" y2="12" />
-              <line x1="4" y1="17" x2="20" y2="17" />
+              <line className={styles.bar} x1="4" y1="7" x2="20" y2="7" />
+              <line className={styles.bar} x1="4" y1="12" x2="20" y2="12" />
+              <line className={styles.bar} x1="4" y1="17" x2="20" y2="17" />
             </svg>
           </button>
         </div>

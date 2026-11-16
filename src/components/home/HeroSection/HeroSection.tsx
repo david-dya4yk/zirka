@@ -1,11 +1,10 @@
 'use client';
 
-import Image from 'next/image';
 import { useEffect, useRef, useState } from 'react';
 import { Button } from '@/components/ui/Button';
 import { SiteNav } from '@/components/layout/SiteNav';
 import { COORDS_LABEL } from '@/lib/khotynska';
-import { FRAME_COUNT, STAGES, frameSrc, stageIndexAt } from './stages';
+import { FRAME_SETS, MOBILE_FRAMES_QUERY, STAGES, frameAt, frameSrc, stageIndexAt } from './stages';
 import styles from './HeroSection.module.scss';
 
 // Ignore sub-pixel scroll changes so the HUD doesn't re-render on every tick.
@@ -15,11 +14,12 @@ export function HeroSection(): React.JSX.Element {
   const trackRef = useRef<HTMLElement>(null);
   const [progress, setProgress] = useState(0);
 
-  // Warm the browser cache so frame swaps don't flash while scrolling.
+  // Warm the browser cache with the set this screen shows, so frame swaps don't flash.
   useEffect(() => {
-    for (let i = 1; i < FRAME_COUNT; i++) {
+    const set = window.matchMedia(MOBILE_FRAMES_QUERY).matches ? 'mobile' : 'desktop';
+    for (let i = 1; i < FRAME_SETS[set].count; i++) {
       const img = new window.Image();
-      img.src = frameSrc(i);
+      img.src = frameSrc(set, i);
     }
   }, []);
 
@@ -50,7 +50,6 @@ export function HeroSection(): React.JSX.Element {
     };
   }, []);
 
-  const frameIndex = Math.round(progress * (FRAME_COUNT - 1));
   const percent = Math.round(progress * 100);
   const stageIndex = stageIndexAt(progress);
   const stage = STAGES[stageIndex] ?? STAGES[0];
@@ -59,16 +58,19 @@ export function HeroSection(): React.JSX.Element {
   return (
     <section ref={trackRef} className={styles.track} aria-label="Хід будівництва">
       <div className={styles.stage}>
-        <Image
-          className={styles.frame}
-          src={frameSrc(frameIndex)}
-          alt="Хід будівництва ЖК на Хотинській"
-          fill
-          sizes="100vw"
-          unoptimized
-          loading="eager"
-          fetchPriority="high"
-        />
+        {/* Full-resolution frames straight from /public: the image optimizer would soften them. */}
+        <picture>
+          <source
+            media={MOBILE_FRAMES_QUERY}
+            srcSet={frameSrc('mobile', frameAt('mobile', progress))}
+          />
+          <img
+            className={styles.frame}
+            src={frameSrc('desktop', frameAt('desktop', progress))}
+            alt="Хід будівництва ЖК на Хотинській"
+            fetchPriority="high"
+          />
+        </picture>
 
         <div className={styles.scrim} aria-hidden="true" />
 
