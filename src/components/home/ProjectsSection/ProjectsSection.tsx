@@ -118,7 +118,7 @@ export function ProjectsSection(): React.JSX.Element {
         <article className={styles.featured}>
           <div className={styles.featuredMedia}>
             <Image
-              src="/frames/039.jpg"
+              src="/frames/desktop/094.webp"
               alt="ЖК на Хотинській"
               fill
               sizes="(max-width: 768px) 100vw, 56vw"
