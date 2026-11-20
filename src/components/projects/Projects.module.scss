@@ -13,6 +13,14 @@
 .slides {
   position: absolute;
   inset: 0;
+
+  // A full-height portrait crop of the landscape photos showed only a slice of the facade:
+  // on phones the photos take the upper part of the hero and fade into the dark below the text.
+  @include down('md') {
+    bottom: auto;
+    height: 64%;
+    mask-image: linear-gradient(180deg, #000 72%, transparent 100%);
+  }
 }
 
 .slide {
@@ -20,6 +28,10 @@
   opacity: 0;
   transform: scale(1.04);
   transition: opacity 1.4s cubic-bezier(0.2, 0, 0.1, 1);
+
+  @include down('md') {
+    transform: none;
+  }
 }
 
 .slideActive {

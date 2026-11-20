@@ -16,12 +16,12 @@ export interface Project {
 
 // Hero slideshow: photos of completed objects in this order; the caption names the current one.
 export const HERO_SLIDES = [
-  { src: '/images/projects/pidkovy-11b-facade.jpg', label: 'ЖК на Івана Підкови, 11-Б' },
+  { src: '/images/projects/pidkovy-11b.jpg', label: 'ЖК на Івана Підкови, 11-Б' },
   { src: '/images/projects/vyshneva-facade.jpg', label: 'ЖК на Вишневій, 14Б' },
-  { src: '/images/rohizna.jpg', label: 'Клуб «Рогізна»' },
+  { src: '/images/rohizna-facade.jpg', label: 'Клуб «Рогізна»' },
   { src: '/images/bnu.jpg', label: 'Учбовий корпус БНУ' },
   { src: '/images/projects/zavodska-56k.jpg', label: 'ЖК на Заводській, 56-К' },
-  { src: '/images/projects/pidkovy-11a.jpg', label: 'ЖК на Івана Підкови, 11-А' },
+  { src: '/images/projects/pidkovy-11a-facade.jpg', label: 'ЖК на Івана Підкови, 11-А' },
 ] as const;
 
 export const HERO_CHIPS = [
@@ -44,6 +44,12 @@ export const FEATURED = {
 
 export const PROJECTS: readonly Project[] = [
   {
+    name: 'ЖК на Івана Підкови, 11-Б',
+    address: 'Чернівці',
+    category: 'residential',
+    image: '/images/projects/pidkovy-11b.jpg',
+  },
+  {
     name: 'ЖК на Вишневій',
     address: 'Чернівці, вул. Вишнева, 14Б',
     category: 'residential',
@@ -51,6 +57,19 @@ export const PROJECTS: readonly Project[] = [
     text: 'Зданий житловий комплекс — можна оглянути сьогодні. Деякі квартири ще доступні.',
     offer: '+3 м²',
     cta: { label: 'Вільні квартири →', href: '/contacts#contact' },
+  },
+  {
+    name: 'Клуб «Рогізна»',
+    address: 'вул. Возʼєднання, 2А',
+    category: 'public',
+    image: '/images/rohizna-facade.jpg',
+    text: 'Громадська споруда, побудована нами під ключ. Простір, у який чернівчани ходять роками.',
+  },
+  {
+    name: 'ЖК на Івана Підкови, 11-А',
+    address: 'Чернівці',
+    category: 'residential',
+    image: '/images/projects/pidkovy-11a-facade.jpg',
   },
   {
     name: 'ЖК на Заводській, 58-З',
@@ -65,22 +84,10 @@ export const PROJECTS: readonly Project[] = [
     image: '/images/projects/zavodska-56k.jpg',
   },
   {
-    name: 'ЖК на Івана Підкови, 11-А',
-    address: 'Чернівці',
-    category: 'residential',
-    image: '/images/projects/pidkovy-11a.jpg',
-  },
-  {
-    name: 'ЖК на Івана Підкови, 11-Б',
-    address: 'Чернівці',
-    category: 'residential',
-    image: '/images/projects/pidkovy-11b-facade.jpg',
-  },
-  {
     name: 'ЖК на Вересневій, 1-З',
     address: 'Чернівці',
     category: 'residential',
-    image: '/images/projects/veresneva-facade.jpg',
+    image: '/images/projects/veresneva-1z.jpg',
   },
   {
     name: 'Учбовий корпус БНУ',
@@ -88,13 +95,6 @@ export const PROJECTS: readonly Project[] = [
     category: 'public',
     image: '/images/bnu.jpg',
     text: 'Корпус ПВНЗ «Буковинський університет» — здали в експлуатацію як генпідрядник.',
-  },
-  {
-    name: 'Клуб «Рогізна»',
-    address: 'вул. Возʼєднання, 2А',
-    category: 'public',
-    image: '/images/rohizna.jpg',
-    text: 'Громадська споруда, побудована нами під ключ. Простір, у який чернівчани ходять роками.',
   },
 ];
 
