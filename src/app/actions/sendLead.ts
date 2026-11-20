@@ -72,7 +72,10 @@ function formatLead(lead: {
 
 export async function sendLead(_prev: LeadFormState, formData: FormData): Promise<LeadFormState> {
   // Honeypot: hidden field humans never fill. Pretend success so bots don't retry.
-  if (field(formData, 'company')) {
+  // Its name means nothing to browsers: a «company»-like name got autofilled from people's
+  // saved profiles, and their leads were silently dropped.
+  if (field(formData, 'hp_ref')) {
+    console.warn('sendLead: honeypot filled, lead dropped', field(formData, 'phone', 32));
     return { status: 'success', message: 'Дякуємо! Ми звʼяжемося з вами найближчим часом.' };
   }
 

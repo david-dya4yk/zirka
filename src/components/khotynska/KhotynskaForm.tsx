@@ -27,7 +27,7 @@ export function KhotynskaForm(): React.JSX.Element {
       <input
         className={styles.honeypot}
         type="text"
-        name="company"
+        name="hp_ref"
         tabIndex={-1}
         autoComplete="off"
         aria-hidden="true"
