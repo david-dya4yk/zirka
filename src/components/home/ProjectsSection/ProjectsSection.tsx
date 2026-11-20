@@ -33,7 +33,7 @@ const COMPLETED: readonly CompletedProject[] = [
   {
     name: 'Клуб «Рогізна»',
     address: 'Чернівці',
-    image: '/images/rohizna.jpg',
+    image: '/images/rohizna-facade.jpg',
     badge: 'neutral',
     note: 'Громадський обʼєкт',
     forSale: false,
