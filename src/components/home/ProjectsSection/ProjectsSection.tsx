@@ -15,20 +15,20 @@ interface CompletedProject {
 
 const COMPLETED: readonly CompletedProject[] = [
   {
+    name: 'ЖК на Івана Підкови, 11-Б',
+    address: 'Чернівці',
+    image: '/images/projects/pidkovy-11b.jpg',
+    badge: 'neutral',
+    note: 'Житловий комплекс',
+    forSale: false,
+  },
+  {
     name: 'ЖК на Вишневій',
     address: 'Чернівці, вул. Вишнева, 14Б',
     image: '/images/projects/vyshneva-facade.jpg',
     badge: 'success',
     note: 'Є вільні квартири',
     forSale: true,
-  },
-  {
-    name: 'Учбовий корпус БНУ',
-    address: 'Буковинський університет',
-    image: '/images/bnu.jpg',
-    badge: 'neutral',
-    note: 'Громадський обʼєкт',
-    forSale: false,
   },
   {
     name: 'Клуб «Рогізна»',
